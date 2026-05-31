@@ -69,6 +69,9 @@ auto
 .*.swp
 .*.swo
 
+# IntelliJ specific files
+.idea/*
+
 # Temp files created by other tools
 Icon*
 .sync/
@@ -95,3 +98,6 @@ mauvecorp_vpn_client.db
 
 # Random scratch files
 scratch/tikztest.pdf
+
+# Opencode
+node-modules/
