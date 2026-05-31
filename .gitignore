@@ -95,3 +95,7 @@ mauvecorp_vpn_client.db
 
 # Random scratch files
 scratch/tikztest.pdf
+
+# Opencode
+node-modules/
+*.bak
