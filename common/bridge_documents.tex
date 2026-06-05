@@ -6,9 +6,14 @@
     bridge_documents.getDocumentVersion(key, tex)
   end
 
-  function get_version_number_for_reflist(version)
-   return bridge_documents.get_version_number_for_reflist(version)
-  end
+  -- TeX wrapper: accepts a document key (e.g. 'ase') and produces the version string for \reflist
+  % Usage in ref-list documents becomes:
+  %   \getRefListVersion{ase} → "6.1" (stable) or "6.0-SNAPSHOT" (development)
+  % The function delegates to `documents.get_version_for_reflist()` which reads from the database
+  % and decrements minor version for `-SNAPSHOT` documents.
+  function getRefListVersion(key)
+    tex.sprint(bridge_documents.version_number_for_reflist(key))
+   end
 
   function gitCommitId(key)
     bridge_documents.gitCommitId(key, tex)

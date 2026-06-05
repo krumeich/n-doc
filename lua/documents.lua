@@ -59,7 +59,18 @@ function documents.get_version_number_for_reflist(version)
    local nosnap, is_snapshot = string.gsub(version, "-SNAPSHOT", "")
    local major, minor = cmn.split_at_dot(nosnap)
    if is_snapshot > 0 and tonumber(minor) > 0 then
-     minor = tonumber(minor)-1
+      minor = tostring(tonumber(minor)-1)
+   end
+   return major .. "." .. minor
+end
+
+function documents.get_version_for_reflist(key)
+   local version = cmn.get_by_query_key("docversion", key)
+   if not version then return nil end
+   local nosnap, is_snapshot = string.gsub(version, "-SNAPSHOT", "")
+   local major, minor = cmn.split_at_dot(nosnap)
+   if is_snapshot > 0 and tonumber(minor) > 0 then
+      minor = tostring(tonumber(minor)-1)
    end
    return major .. "." .. minor
 end

@@ -3,9 +3,9 @@ adv_arc;1.0-SNAPSHOT;\today;pdf
 adv_fsp;1.0-SNAPSHOT;\today;pdf
 adv_tds;1.0-SNAPSHOT;\today;pdf
 alc;1.0-SNAPSHOT;\today;pdf
-ase;1.0-SNAPSHOT;\today;pdf
+ase;1.0;\today;pdf
 ate_cov;1.0-SNAPSHOT;\today;pdf
 ate_fun;1.0-SNAPSHOT;\today;pdf
 reflist;1.0-SNAPSHOT;\today;pdf
 db;1.0-SNAPSHOT;\today;db
-configitems;1.0-SNAPSHOT;\today;pdf
+configitems;1.0-SNAPSHOT;\today;db
