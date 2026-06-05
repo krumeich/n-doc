@@ -4,6 +4,8 @@ dbcore.resultmappers={}
 dbcore.insert_statements={}
 dbcore.queries={}
 
+cmn = require "common"
+
 function dbcore.init(db_path)
    dbcore.dbpath = db_path
    print("DB Path:", dbcore.dbpath)
@@ -68,22 +70,15 @@ function prepare_queries(queries)
    end
 end
 
-function insert_error(result)
-  if (#result == 0) then
-     table.insert(result, "__error__")
-  end
-  return result
-end
-
 function singleresult(v, querykey)
    local resultitem_name = dbcore.queries[querykey].resultitem;
-   local result = v[resultitem_name]
-   return result
+   local result = v[resultitem_name];
+   return type(result) == "number" and tostring(result) or result
 end;
 
 function dbcore.read_from_db(querykey, values, error_mapper)
    local result = {}
-   local result_filter = error_mapper or insert_error
+   local result_filter = error_mapper or cmn.insert_error
    local mapper = dbcore.queries[querykey].mapper or singleresult
    local stmt = dbcore.queries[querykey].querystmt
    stmt:bind_names(values)
@@ -92,6 +87,10 @@ function dbcore.read_from_db(querykey, values, error_mapper)
    end
    stmt:reset()
    return result_filter(result)
+end
+
+function dbcore.has_error(result)
+   return type(result[1]) == "table" and result[1].err == true
 end
 
 return dbcore

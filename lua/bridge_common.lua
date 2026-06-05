@@ -3,12 +3,12 @@ bridge_common={}
 common = require "common"
 
 function bridge_common.init(db_path)
-   bridge_common.db_path = db_path
-   print ("Luabridge", db_path)
-   if _G.db_core == nil then
-      _G.db_core = require "db_core"
-      _G.db_core.init(db_path)
-   end
+    bridge_common.db_path = db_path
+    print ("Luabridge", db_path)
+    if _G.db_core == nil then
+       _G.db_core = require "db_core"
+       _G.db_core.init(db_path)
+    end
 end
 
 function bridge_common.toLower(key, tex)

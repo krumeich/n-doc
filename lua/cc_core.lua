@@ -347,35 +347,47 @@ function cc_core.getNumberOfTestcasesModule(key)
    return cmn.check_for_errors(dbresult, "anzahl")
 end
 
-function insert_error(result)
-  if (#result == 0) then
-     table.insert(result, "__error__")
-  end
-  return result
-end
+-- Uses common.insert_error for consistency with db_core.
 
 function cc_core.replacelabel(key, fq)
-   local typkey, subkey, modkey, intkey = cmn.split_at_dot(key)
-   local values = {subkey, modkey, intkey}
-   local replacedlabel = {}
-   local sub = subkey and cmn.get_relations_by_query_key("sub", values, insert_error)[1]
-   local mod = modkey and cmn.get_relations_by_query_key("mod", values, insert_error)[1]
-   local int = intkey and cmn.get_relations_by_query_key("int", values, insert_error)[1]
-   if fq then
-      table.insert(replacedlabel, sub)
-      table.insert(replacedlabel, mod and "::\\-")
-      table.insert(replacedlabel, mod)
-      table.insert(replacedlabel, int and "//\\-")
-      table.insert(replacedlabel, int)
-   else
-      local results = {sub, mod, int}
-      local whatvalue = {sub=1, mod=2, int=3}
-      local thekey = whatvalue[typkey]
-      local dbresult = cmn.get_relations_by_query_key(typkey, values)[thekey]
-      table.insert(replacedlabel, results[thekey])
-   end
-    local result = table.concat(replacedlabel)
-    return string.gsub(result, ".*__error__.*", "\\textcolor{red}{".. key .." is undefined}")
+    local typkey, subkey, modkey, intkey = cmn.split_at_dot(key)
+    local values = {subkey, modkey,intkey}
+    local replacedlabel = {}
+    local has_err = false
+    
+    local r_sub = subkey and cmn.get_relations_by_query_key("sub", values, cmn.insert_error) or {}
+    local r_mod = modkey and cmn.get_relations_by_query_key("mod", values, cmn.insert_error) or {}
+    local r_int = intkey and cmn.get_relations_by_query_key("int", values, cmn.insert_error) or {}
+    
+    if cmn.has_error(r_sub) then has_err = true end
+    if cmn.has_error(r_mod) then has_err = true end
+    if cmn.has_error(r_int) then has_err = true end
+    
+    local sub = r_sub[1]
+    local mod_ = r_mod[1] 
+    local int = r_int[1]
+    
+    if fq then
+       table.insert(replacedlabel, sub)
+       table.insert(replacedlabel, mod_ and "::\\-")
+       table.insert(replacedlabel, mod_)
+       table.insert(replacedlabel, int and "//\\-")
+       table.insert(replacedlabel, int)
+    else
+       local results = {sub, mod_, int}
+       local whatvalue = {sub=1, mod=2, int=3}
+       local thekey = whatvalue[typkey]
+       local dbresult = cmn.get_relations_by_query_key(typkey, values)[thekey]
+       table.insert(replacedlabel, results[thekey])
+    end
+    
+     if has_err then
+        local escaped_key = string.gsub(key, "_", "\\_")
+        return "\\textcolor{red}{".. escaped_key .." is undefined}"
+     end
+     
+     local result = table.concat(replacedlabel)
+     return result
 end
 
 function cc_core.mapper(x)
@@ -454,16 +466,19 @@ function cc_core.map_modules_to_sfr(sfr_label, relation)
 end
 
 function cc_core.check_for_errors_in_lists(result, key)
-    if result[1] == "__error__" then
-        result = {}
+    if cmn.has_error(result) then
+        return {}
     end
-    --   result[1] = string.gsub(result[1], ".*__error__.*", [[\ndocnone]])
-   return result
+    return result
 end
 
 function cc_core.check_for_errors(replacedlabel, key)
+    if cmn.has_error(replacedlabel) then
+        local escaped_key = string.gsub(key, "_", "\\_")
+        return "\\textcolor{red}{" .. escaped_key .. " is undefined}"
+    end
     local result = table.concat(replacedlabel)
-    return string.gsub(result, ".*__error__.*", "\\textcolor{red}{".. key .." is undefined}")
+    return result
 end
 
 return cc_core

@@ -1,5 +1,20 @@
 common = {}
 
+-- Singleton error sentinel — stored on common so all modules share one object identity without importing db_core
+common._ERROR_SENTINEL = {err=true}
+
+-- Centralized error detection – callers check result[1] against this single object
+function common.has_error(result)
+   return type(result[1]) == "table" and result[1].err == true
+end
+
+function common.insert_error(result)
+   if (#result == 0) then
+       table.insert(result, common._ERROR_SENTINEL)
+   end
+   return result
+end
+
 function common.split(key, sep)
    local sep, fields = sep or ".", {}
    local pattern = string.format("([^%s]+)", sep)
@@ -35,10 +50,12 @@ function common.get_relations_by_query_key(querykey, keymap, error_mapper)
    return dbresult
 end
 
-function common.check_for_errors(replaced, key)
-   local key = string.gsub(key, "_", "\\_")
-   local result = string.gsub(replaced[1], ".*__error__.*", "\\textcolor{red}{".. key .." is undefined}")
-   return result
+function common.check_for_errors(result, key)
+    if _G.db_core.has_error(result) then
+        local escaped_key = string.gsub(key, "_", "\\_")
+        return "\\textcolor{red}{" .. escaped_key .. " is undefined}"
+    end
+    return result[1]
 end
 
 function common.generate_label_list(thelabel)
