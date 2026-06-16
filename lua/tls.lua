@@ -1,7 +1,7 @@
 local tls = {}
 
 function tls.lazyinit()
-    connections = {}
+    local connections = {}
     if not tls.initialized then
        local parser = require "ftcsv"
        local parsedTable = parser.parse("../common/tls_definitions.csv", ";")
