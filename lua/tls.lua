@@ -13,6 +13,7 @@ function tls.lazyinit()
        		connections[v.key] = tableentry
        end
        tls.connections = connections
+       tls.initialized = true
    end
 end
 
