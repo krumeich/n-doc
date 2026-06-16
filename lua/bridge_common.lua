@@ -26,7 +26,7 @@ function bridge_common.remove_smart_hyphen(key)
 end
 
 function bridge_common.labels(labeltype)
-   labels = common.generate_label_list(labeltype)
+    local labels = common.generate_label_list(labeltype)
    local i = 0
    return function ()
       i = i + 1

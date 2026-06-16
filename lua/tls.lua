@@ -1,24 +1,24 @@
 local tls = {}
 
 function tls.lazyinit()
-   connections = {}
-   if tls.initialized == nil then
-      local parser = require "ftcsv"
-      local parsedTable = parser.parse("../common/tls_definitions.csv", ";")
-      for k,v in pairs(parsedTable) do
-      	 tableentry = {key=v.key, logicalintf=v.logicalintf, role=v.role, peer=v.peer, protocol=v.protocol, port=v.port, idtoe=v.idtoe, idpeer=v.idpeer, authpeer=v.authpeer}
-	 tableentry.tdslink = v.submod == "NN" and "NN" or "\\tdslink[fq]{"  .. v.submod .. "}"
-	 tableentry.tds     = v.submod == "NN" and "NN" or "\\tds[fq]{"  .. v.submod .. "}"
-	 tableentry.submod  = v.submod == "NN" and "NN" or v.submod
-      	 connections[v.key] = tableentry
-      end
-      tls.connections = connections
+    connections = {}
+    if not tls.initialized then
+       local parser = require "ftcsv"
+       local parsedTable = parser.parse("../common/tls_definitions.csv", ";")
+       for k,v in pairs(parsedTable) do
+       		local tableentry = {key=v.key, logicalintf=v.logicalintf, role=v.role, peer=v.peer, protocol=v.protocol, port=v.port, idtoe=v.idtoe, idpeer=v.idpeer, authpeer=v.authpeer}
+		tableentry.tdslink = v.submod == "NN" and "NN" or "\\tdslink[fq]{"  .. v.submod .. "}"
+		tableentry.tds     = v.submod == "NN" and "NN" or "\\tds[fq]{"  .. v.submod .. "}"
+		tableentry.submod  = v.submod == "NN" and "NN" or v.submod
+       		connections[v.key] = tableentry
+       end
+       tls.connections = connections
    end
 end
 
 function tls.printTlsConnectionTable(create_tdslinks)
+   local result = {}
    tls.lazyinit()
-   result = {}
    for tlsid in pairs(tls.connections) do
       table.insert(result, tls.getTlsConnectionTableRow(tlsid))
    end

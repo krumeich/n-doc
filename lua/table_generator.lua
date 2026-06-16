@@ -72,8 +72,8 @@ function tg.print_sfr_table_for_subsys(enfsup, sfrs)
    table.insert(result, [[~SFR & \ndocpurpose \\\midrule\relax]])
    if #sfrs > 0 then
       local formatsfr = tg.itemformatters["sfrnoindex"]
-      for _,v in pairs(sfrs) do
-	 row = {}
+for _,v in pairs(sfrs) do
+    local row = {}
 	 table.insert(row, formatsfr(v.sfr))
 	 table.insert(row, v.purpose and eoc)
 	 table.insert(row, v.purpose)
