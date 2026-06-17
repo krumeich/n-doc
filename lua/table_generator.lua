@@ -72,7 +72,7 @@ function tg.print_sfr_table_for_subsys(enfsup, sfrs)
    table.insert(result, [[~SFR & \ndocpurpose \\\midrule\relax]])
    if #sfrs > 0 then
       local formatsfr = tg.itemformatters["sfrnoindex"]
-for _,v in pairs(sfrs) do
+	for _,v in ipairs(sfrs) do
     local row = {}
 	 table.insert(row, formatsfr(v.sfr))
 	 table.insert(row, v.purpose and eoc)
@@ -122,7 +122,7 @@ end
 function tg.print_bundle_table_for_module(bundles)
    local result = {"\\begin{bundletable}"}
    table.insert(result, "Bundles\\\\\\midrule\\relax")
-   for _,bundle in pairs(bundles) do
+   for _,bundle in ipairs(bundles) do
       local row = {}
       table.insert(row, tg.itemformatters["bundle"](bundle))
       if #row > 0 then
@@ -139,7 +139,7 @@ function tg.print_item_list(items, itemtype, outputparams)
    local result = {}
    local sepchar = outputparams and outputparams["sepchar"] or ", "
    local emptyitem = outputparams and outputparams["emptyitem"] or [[\ndocnone]]
-   for _,item in pairs(items) do
+   for _,item in ipairs(items) do
       table.insert(result, tg.itemformatters[itemtype](item))
    end
    if #result==0 then table.insert(result, emptyitem) end
@@ -163,7 +163,7 @@ end
 function appendmodules(modules, result)
     if #modules > 0 then
         local formatmod = tg.itemformatters["module"]
-        for i, module in pairs(modules) do
+        for i, module in ipairs(modules) do
             if i > 1 then
                 table.insert(result, "& & ")
             end
