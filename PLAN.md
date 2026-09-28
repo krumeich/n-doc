@@ -23,8 +23,8 @@
 
 ## Phase 4 — Style and Idiomacy
 
-- [ ] **13. Mixed naming conventions** — camelCase (`getSfr`) vs snake_case (`get_module_status`) with no clear rule. (all files)
 - [ ] **14. Trailing semicolons** — scattered in a few places, not idiomatic Lua. (`cc_core.lua:76`, `common.lua:33`)
+- [x] **13. Mixed naming conventions** — camelCase (`getSfr`) vs snake_case (`get_module_status`) with no clear rule. (all files) — **Won't fix.** Renaming touches 4 layers (core → bridge .lua → bridge .tex → macros .tex) across 60+ call sites. Risk outweighs cosmetic benefit. Convention: snake_case for new code.
 - [ ] **15. Mixed tab/space indentation** — e.g. `db_core.lua:46` uses tabs while surrounding code uses spaces. (various files)
 - [ ] **16. `pairs` on sequential arrays** — many places use `pairs()` where `ipairs()` is correct for ordered iteration. (`db_core.lua`, `table_generator.lua`, bridge files)
 - [ ] **17. Unused parameters** — `cc_core.getTestcases(srckey)`, `tls.printTlsConnectionTable(create_tdslinks)`, `tls.getTlsConnectionTableRow(key, create_tdslinks)`. (various files)
