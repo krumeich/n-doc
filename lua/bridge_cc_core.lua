@@ -60,8 +60,8 @@ function bridge_cc_core.print_modules_for_sfr_rows(tex)
       local enf_modules = cc_core.map_modules_to_sfr(sfr, "enf")
       local sup_modules = cc_core.map_modules_to_sfr(sfr, "sup")
       if #enf_modules > 0 or #sup_modules > 0 then
-	 local tablerow = tg.generate_modules_for_sfr_row(sfr, enf_modules, sup_modules)
-	 table.insert(resulttable, tablerow)
+            local tablerow = tg.generate_modules_for_sfr_row(sfr, enf_modules, sup_modules)
+            table.insert(resulttable, tablerow)
       end
    end
    tex.print(table.concat(resulttable))
@@ -72,8 +72,8 @@ function bridge_cc_core.print_tsfi_for_sfr_rows(tex)
    for sfr in common.labels("mainsfr") do
       local tsfi = cc_core.getSfr2Tsfi(sfr)
       if #tsfi > 0 then
-	 local tablerow = tg.generate_tsfi_for_sfr_row(sfr, tsfi)
-	 table.insert(resulttable, tablerow)
+            local tablerow = tg.generate_tsfi_for_sfr_row(sfr, tsfi)
+            table.insert(resulttable, tablerow)
       end
    end
    tex.print(table.concat(resulttable))
@@ -84,8 +84,8 @@ function bridge_cc_core.print_sfr_for_tsfi_rows(tex)
    for tsfi in common.labels("tsfi") do
       local sfr = cc_core.getTsfi2Sfr(tsfi)
       if #sfr > 0 then
-	 local tablerow = tg.generate_sfr_for_tsfi_row(tsfi, sfr)
-	 table.insert(resulttable, tablerow)
+            local tablerow = tg.generate_sfr_for_tsfi_row(tsfi, sfr)
+            table.insert(resulttable, tablerow)
       end
    end
    tex.print(table.concat(resulttable))
@@ -269,7 +269,7 @@ function bridge_cc_core.print_table_body(table_params, tex)
       local data_row = init_data_row(table_params.label_header)
       local tupel = selector(l)
       for _,val in pairs(tupel) do
- 	 data_row[val]=[[\tcheck]]
+            data_row[val]=[[\tcheck]]
       end
       local tablerow={}
       table.insert(tablerow, [[\textsmaller[1]{\]])

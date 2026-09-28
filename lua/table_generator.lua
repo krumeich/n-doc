@@ -22,7 +22,7 @@ function tg.column_iterator_3(t)
       local col3 = s+(2*num_rows)
       if s > num_rows then return nil end
       s=s+1
-      return col1, col2, col3 
+      return col1, col2, col3
    end
 end
 
@@ -55,7 +55,7 @@ end
 
 tg.itemformatters = {
    tsfi = function(i) if i then return "\\tsfi{" .. i .. "}" end end,
-   tsfianchor = function(i) if i then return "\\hypertarget{" .. i .. "}{\\tsfi{" .. i .. "}}" end end,      
+   tsfianchor = function(i) if i then return "\\hypertarget{" .. i .. "}{\\tsfi{" .. i .. "}}" end end,
    tsfilink = function(i) if i then return "\\tsfilink{" .. i .. "}" end end,
    sflink = function(i) if i then return "\\secfunclink{" .. i .. "}" end end,
    bundle = function(i) if i then return "\\bundle{" .. i .. "}" end end,
@@ -75,14 +75,14 @@ function tg.print_sfr_table_for_subsys(enfsup, sfrs)
    if #sfrs > 0 then
       local formatsfr = tg.itemformatters["sfrnoindex"]
       for _,v in pairs(sfrs) do
-	 local row = {}
-	 table.insert(row, formatsfr(v.sfr))
-	 table.insert(row, v.purpose and eoc)
-	 table.insert(row, v.purpose)
-	 if #row > 0 then
-	    table.insert(row, eol)
-	 end
-	 table.insert(result, table.concat(row))
+            local row = {}
+            table.insert(row, formatsfr(v.sfr))
+            table.insert(row, v.purpose and eoc)
+            table.insert(row, v.purpose)
+            if #row > 0 then
+                  table.insert(row, eol)
+            end
+            table.insert(result, table.concat(row))
       end
    else
       table.insert(result,[[\ndocnone]])
@@ -109,9 +109,9 @@ function tg.print_sfr_table_for_module(enfsup, sfrs)
          table.insert(row, sfr3 and eoc)
          table.insert(row, sfr3)
          if #row > 0 then
-	    table.insert(row, eol)
-	 end
-	 table.insert(result, table.concat(row))
+               table.insert(row, eol)
+         end
+         table.insert(result, table.concat(row))
       end
    else
       table.insert(result,[[\ndocnone]])
@@ -128,7 +128,7 @@ function tg.print_bundle_table_for_module(bundles)
       local row = {}
       table.insert(row, tg.itemformatters["bundle"](bundle))
       if #row > 0 then
-	 table.insert(row, eol)
+            table.insert(row, eol)
       end
       table.insert(result, table.concat(row))
    end
@@ -151,13 +151,13 @@ end
 function tg.generate_modules_for_sfr_row(sfr, enf_modules, sup_modules)
     local result = {"\\midrule\\relax"}
     local formatsfr = tg.itemformatters["sfranchor"]
-    
+
     table.insert(result, formatsfr(sfr) .. " & Enforcing & ")
     appendmodules(enf_modules, result)
-    
+
     table.insert(result, "& Supporting & ")
     appendmodules(sup_modules, result)
-    
+
     if result[#result] == ps_eol then result[#result] = eol end
     return table.concat(result)
 end
@@ -283,7 +283,7 @@ function tg.generate_numbers_rows(items, label, counterfunc, columns)
       table.insert(row, item_col4 and eoc)
       table.insert(row, item_col4 and counterfunc(items[col4]))
       if #row > 0 then
-	 table.insert(row, eol)
+            table.insert(row, eol)
       end
       table.insert(result, table.concat(row))
    end

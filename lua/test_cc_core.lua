@@ -100,21 +100,21 @@ end
 
 function test_cc_core.test_sfr_to_tsfi()
    lu.assertEquals(cc_core.getSfr2Tsfi("fcs_ckm.4"), --
-		   {{label = "ls.lan.tls", purpose = "Terminate TLS connections to LAN", relationtype = "sup"},
-		      {label = "ls.wan.ipsec", purpose = "Terminate IPSEC connections to WAN", relationtype = "sup"}})
+         {{label = "ls.lan.tls", purpose = "Terminate TLS connections to LAN", relationtype = "sup"},
+            {label = "ls.wan.ipsec", purpose = "Terminate IPSEC connections to WAN", relationtype = "sup"}})
    lu.assertEquals(cc_core.getSfr2Tsfi("fmt_msa.3.1/sig"), {})
 end
 
 function test_cc_core.test_tsfi_to_sfr()
    lu.assertEquals(cc_core.getTsfi2Sfr("ls.wan.ipsec"), --
-		   {{label = "fcs_ckm.1", purpose = "Key negotiation for VPN", relationtype = "sup"},
-		      {label = "fcs_ckm.2/ike", purpose = "Key distribution for VPN", relationtype = "sup"},
-		      {label = "fcs_ckm.4", purpose = "Terminate IPSEC connections to WAN", relationtype = "sup"},
-		      {label = "fcs_cop.1/hash", purpose = "IPSec hash operations", relationtype = "enf"},
-		      {label = "fcs_cop.1/hmac", purpose = "IPSec HMAC operations", relationtype = "enf"},
-		      {label = "fcs_rng.1/hashdrbg", purpose = "Key negotiation for VPN", relationtype = "sup"},
-		      {label = "fpt_tdc.1/zert", purpose = "Validate VPN certificate", relationtype = "enf"},
-		      {label = "ftp_itc.1/vpn", purpose = "Secure IPSec tunnel", relationtype = "enf"}})
+         {{label = "fcs_ckm.1", purpose = "Key negotiation for VPN", relationtype = "sup"},
+            {label = "fcs_ckm.2/ike", purpose = "Key distribution for VPN", relationtype = "sup"},
+            {label = "fcs_ckm.4", purpose = "Terminate IPSEC connections to WAN", relationtype = "sup"},
+            {label = "fcs_cop.1/hash", purpose = "IPSec hash operations", relationtype = "enf"},
+            {label = "fcs_cop.1/hmac", purpose = "IPSec HMAC operations", relationtype = "enf"},
+            {label = "fcs_rng.1/hashdrbg", purpose = "Key negotiation for VPN", relationtype = "sup"},
+            {label = "fpt_tdc.1/zert", purpose = "Validate VPN certificate", relationtype = "enf"},
+            {label = "ftp_itc.1/vpn", purpose = "Secure IPSec tunnel", relationtype = "enf"}})
    lu.assertEquals(cc_core.getTsfi2Sfr("ls.lan.cetp"), {})
 end
 
@@ -196,21 +196,21 @@ end
 
 function test_cc_core.test_Module2Sfr() local mod = "mod.tls.core"
    lu.assertEquals(cc_core.generate_table_module_to_sfr(mod, "enf"),
-		   {"fcs_ckm.2/tls", "fcs_cop.1/tls.aes", "fcs_cop.1/tls.auth", "ftp_itc.1/tls"})
+         {"fcs_ckm.2/tls", "fcs_cop.1/tls.aes", "fcs_cop.1/tls.auth", "ftp_itc.1/tls"})
    supportingsfr = {"ftp_trp.1/admin"}
    lu.assertEquals(cc_core.generate_table_module_to_sfr("mod.vpn.core", "sup"), supportingsfr)
 end
 
 function test_cc_core.testSubmod2Bundle()
    lu.assertEquals(cc_core.generate_table_module_to_bundle("mod.tls.core", "enf"),
-		   { "openssl"} )
+         { "openssl"} )
    lu.assertEquals(cc_core.generate_table_module_to_bundle("mod.subxxx.modyyy", "enf"), {} )
 end
 
 
 function test_cc_core.test_get_module_status()
    lu.assertEquals(cc_core.get_module_status("mod.tls.core"), "\\enfc{}")
-   lu.assertEquals(cc_core.get_module_status("mod.adminsystem.mgmt"), "\\supp{}")   
+   lu.assertEquals(cc_core.get_module_status("mod.adminsystem.mgmt"), "\\supp{}")
 end
 
 function test_cc_core.test_getSfr2Sf()

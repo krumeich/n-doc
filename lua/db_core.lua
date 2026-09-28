@@ -46,17 +46,17 @@ populate_tables = function(populate)
       -- print ("Initialisiere Tabelle aus " .. csv)
       local parsedTable = parser.parse(dbcore.dbpath .. csv, ";")
       if texio then
-	 local log_out = {}
-	 table.insert(log_out, "\n(")
-	 table.insert(log_out, dbcore.dbpath)
-	 table.insert(log_out, csv)
-	 table.insert(log_out, ") ")
-	 texio.write("log", table.concat(log_out))
+            local log_out = {}
+            table.insert(log_out, "\n(")
+            table.insert(log_out, dbcore.dbpath)
+            table.insert(log_out, csv)
+            table.insert(log_out, ") ")
+            texio.write("log", table.concat(log_out))
       end
       for k,v in pairs(parsedTable) do
-	 st:bind_names(v)
-	 st:step()
-	 st:reset()
+            st:bind_names(v)
+            st:step()
+            st:reset()
       end
    end
 end
@@ -64,9 +64,9 @@ end
 prepare_queries = function(queries)
    for querykey, st, resultitem, mapper in queries() do
       dbcore.queries[querykey] = {
-	 querystmt = assert(dbcore.db:prepare(st)),
-	 resultitem = resultitem,
-	 mapper = mapper
+            querystmt = assert(dbcore.db:prepare(st)),
+            resultitem = resultitem,
+            mapper = mapper
       }
    end
 end

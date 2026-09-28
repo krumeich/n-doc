@@ -25,12 +25,12 @@ function testtg.testbundletable()
 end
 
 sfrs = {"fmt_msa.3/nk.pf","fpt_stm.1/nk","fpt_tdc.1/nk.zert",
-	"fdp_rip.1/nk","fpt_tst.1/nk","fdp_acf.1/nk.update",
-	"fdp_itc.1/nk.update","fdp_uit.1/nk.update","fau_stg.1/ak",
-	"fau_stg.4/ak","fcs_cop.1/storage.aes",
-	"fcs_cop.1/sign","fcs_cop.1/ak.sha","fcs_ckm.1/ak.aes",
-	"fcs_ckm.4/ak","fcs_cop.1/ak.sigver.ssa","fcs_cop.1/ak.sigver.pss",
-	"fcs_cop.1/ak.sigver.ds2","fcs_cop.1/ak.sigver.ecdsa"}
+      "fdp_rip.1/nk","fpt_tst.1/nk","fdp_acf.1/nk.update",
+      "fdp_itc.1/nk.update","fdp_uit.1/nk.update","fau_stg.1/ak",
+      "fau_stg.4/ak","fcs_cop.1/storage.aes",
+      "fcs_cop.1/sign","fcs_cop.1/ak.sha","fcs_ckm.1/ak.aes",
+      "fcs_ckm.4/ak","fcs_cop.1/ak.sigver.ssa","fcs_cop.1/ak.sigver.pss",
+      "fcs_cop.1/ak.sigver.ds2","fcs_cop.1/ak.sigver.ecdsa"}
 
 sfrtable = [[
 \begin{enfsfrtable}Enforcing~SFR\\\midrule\relax\sfrlinknoindex{fmt_msa.3/nk.pf} & \sfrlinknoindex{fdp_uit.1/nk.update} & \sfrlinknoindex{fcs_ckm.4/ak}\\\sfrlinknoindex{fpt_stm.1/nk} & \sfrlinknoindex{fau_stg.1/ak} & \sfrlinknoindex{fcs_cop.1/ak.sigver.ssa}\\\sfrlinknoindex{fpt_tdc.1/nk.zert} & \sfrlinknoindex{fau_stg.4/ak} & \sfrlinknoindex{fcs_cop.1/ak.sigver.pss}\\\sfrlinknoindex{fdp_rip.1/nk} & \sfrlinknoindex{fcs_cop.1/storage.aes} & \sfrlinknoindex{fcs_cop.1/ak.sigver.ds2}\\\sfrlinknoindex{fpt_tst.1/nk} & \sfrlinknoindex{fcs_cop.1/sign} & \sfrlinknoindex{fcs_cop.1/ak.sigver.ecdsa}\\\sfrlinknoindex{fdp_acf.1/nk.update} & \sfrlinknoindex{fcs_cop.1/ak.sha}\\\sfrlinknoindex{fdp_itc.1/nk.update} & \sfrlinknoindex{fcs_ckm.1/ak.aes}\\\end{enfsfrtable}]]

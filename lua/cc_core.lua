@@ -6,7 +6,7 @@ cc_core.table_definitions = {
    [[CREATE TABLE subjobj ( `label` TEXT, `name` TEXT, `description` TEXT, PRIMARY KEY(`label`) )]],
    [[CREATE TABLE sfr_subjobj ( `sfr` TEXT, `subjobj` TEXT, FOREIGN KEY(`sfr`) REFERENCES `sfr`(`label`), FOREIGN KEY(`subjobj`) REFERENCES `subjobj`(`label`))]],
    [[CREATE TABLE spd ( `label` TEXT, `name` TEXT, `description` TEXT, `PP` TEXT, `PP_order` TEXT, PRIMARY KEY(`label`) )]],
-   [[CREATE TABLE spd_obj ( `spd` TEXT, `obj` TEXT, `rel` TEXT, FOREIGN KEY(`spd`) REFERENCES `spd`(`label`), FOREIGN KEY(`obj`) REFERENCES `obj`(`label`))]],   
+   [[CREATE TABLE spd_obj ( `spd` TEXT, `obj` TEXT, `rel` TEXT, FOREIGN KEY(`spd`) REFERENCES `spd`(`label`), FOREIGN KEY(`obj`) REFERENCES `obj`(`label`))]],
    [[CREATE TABLE subsystems ( `label` TEXT, `name` TEXT, `plainname` TEXT, PRIMARY KEY(`label`) )]],
    [[CREATE TABLE modules ( `subsystem` TEXT, `label` TEXT, `name` TEXT, `plainname` TEXT, PRIMARY KEY(`subsystem`,`label`), FOREIGN KEY(`subsystem`) REFERENCES `subsystems`(`label`) )]],
    [[CREATE TABLE interfaces ( `subsystem` TEXT, `module` TEXT, `label` TEXT, `name` TEXT, PRIMARY KEY(`subsystem`, `module`, `label`), FOREIGN KEY(`subsystem`) REFERENCES `subsystems`(`label`) , FOREIGN KEY(`module`) REFERENCES `modules`(`label`) )]],
@@ -98,7 +98,7 @@ cc_core.querysets = {
     {name="testcase", st=[[SELECT name FROM testcases WHERE label=? COLLATE NOCASE]], resultitem = "name"},
     {name="subjobj2sfr", st=[[select distinct sfr from sfr_subjobj where subjobj=:subjobj]], resultitem="sfr"},
     {name="sfr2subjobj", st=[[select distinct subjobj from sfr_subjobj where sfr=:sfr]], resultitem="subjobj"},
-    {name="sfr2module", st=[[select subsystems.label as sub, modules.label as mod 
+    {name="sfr2module", st=[[select subsystems.label as sub, modules.label as mod
 from sfr join sfr_module on sfr.label = sfr_module.sfr
 join modules on sfr_module.module = modules.label and sfr_module.subsystem = modules.subsystem
 join subsystems on modules.subsystem = subsystems.label
@@ -373,9 +373,9 @@ function cc_core.get_module_status(key)
    else
       local dbresult = cmn.get_relations_by_query_key("module2sfr", {sub=subkey, mod=modkey, rel="sup"})
       if #dbresult > 0 then
-	 return "\\supp{}"
+            return "\\supp{}"
       else
-	 return "\\nontsf{}"
+            return "\\nontsf{}"
       end
    end
 end
