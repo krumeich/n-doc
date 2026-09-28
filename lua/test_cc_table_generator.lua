@@ -2,7 +2,7 @@
 
 dofile("init_test_db.lua")
 
-local tg = require "table_generator"
+local tg = require "cc_table_generator"
 
 lu = require('luaunit')
 

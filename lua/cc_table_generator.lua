@@ -1,5 +1,7 @@
 local tg = {}
 
+local cc_core = require "cc_core"
+
 local appendmodules, appendtsfi, appendsfr
 
 local relationtypes = {enf = "Enforcing", sup = "Supporting"}
@@ -49,7 +51,6 @@ tg.column_iterators[3] = tg.column_iterator_3
 tg.column_iterators[4] = tg.column_iterator_4
 
 function tg.get_module_status(key)
-   local cc_core = require("cc_core")
    return cc_core.get_module_status(key)
 end
 

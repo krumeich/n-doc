@@ -29,7 +29,7 @@
 - [x] **16. `pairs` on sequential arrays** — many places use `pairs()` where `ipairs()` is correct for ordered iteration. (`db_core.lua`, `table_generator.lua`, bridge files)
 - [x] **17. Unused parameters** — `cc_core.getTestcases(srckey)`, `tls.printTlsConnectionTable(create_tdslinks)`, `tls.getTlsConnectionTableRow(key, create_tdslinks)`. (various files)
 - [x] **18. Parameter shadowing** — `local relationtype = relationtype or "enf"` shadows the parameter with a local of the same name. (`cc_core.lua:423,435,450`)
-- [ ] **19. `require` inside function body** — `table_generator.lua:50` does `require("cc_core")` at call-time, obscuring the dependency. (`lua/table_generator.lua:50`)
+- [x] **19. `require` inside function body** — `table_generator.lua:50` does `require("cc_core")` at call-time, obscuring the dependency. (`lua/table_generator.lua:50`)
 - [ ] **20. Redundant table copy** — `cc_core.generate_table_sfr_to_module` copies a table element-by-element then returns it. Could return the original. (`lua/cc_core.lua:413-420`)
 - [ ] **21. Dead code in tests** — loose debugging functions that are not actual tests. (`lua/test_cc_core.lua:211-249`)
 - [ ] **22. Test init duplication** — `init_test_db.lua` and `init_test_bridge.lua` duplicate the `tex` mock setup. (`lua/init_test_db.lua`, `lua/init_test_bridge.lua`)

@@ -241,7 +241,7 @@ function print_submod_2_sfr(key, relationtype)
       print (v)
    end
    print()
-   g = require "table_generator"
+   g = require "cc_table_generator"
    g.print_sfr_table_for_module(relationtype, sfrs)
 end
 
@@ -253,7 +253,7 @@ function print_submod_2_bundle(key)
       print (v)
    end
    print()
-   g = require "table_generator"
+   g = require "cc_table_generator"
    g.print_bundle_table_for_module(bundles)
 end
 

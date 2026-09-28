@@ -2,7 +2,7 @@ local bridge_cc_core={}
 
 local cc_core = require "cc_core"
 local common = require "common"
-local tg = require "table_generator"
+local tg = require "cc_table_generator"
 
 local init_data_row, p
 
