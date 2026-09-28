@@ -1,8 +1,8 @@
 local tls = {}
 
 function tls.lazyinit()
-   connections = {}
    if tls.initialized == nil then
+      connections = {}
       local parser = require "ftcsv"
       local parsedTable = parser.parse("../common/tls_definitions.csv", ";")
       for k,v in pairs(parsedTable) do
@@ -13,6 +13,7 @@ function tls.lazyinit()
       	 connections[v.key] = tableentry
       end
       tls.connections = connections
+      tls.initialized = true
    end
 end
 
