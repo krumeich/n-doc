@@ -3,17 +3,17 @@ local bridge_tls={}
 local tls=require("tls")
 
 function bridge_tls.printTlsConnectionTable(tex)
-   conntable = tls.printTlsConnectionTable()
+   local conntable = tls.printTlsConnectionTable()
    tex.sprint(conntable)
 end
 
 function bridge_tls.getTlsConnectionTableRow(key, document, tex)
-   conntable = tls.getTlsConnectionTableRow(key, string.find(document, "advtds"))
+   local conntable = tls.getTlsConnectionTableRow(key, string.find(document, "advtds"))
    tex.sprint(conntable)
 end
 
 function bridge_tls.printTlsParametersForModule(key, tex)
-   conntable = tls.printTlsParametersForModule(key)
+   local conntable = tls.printTlsParametersForModule(key)
    tex.sprint(conntable)
 end
 

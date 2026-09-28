@@ -7,7 +7,7 @@ function bridge_documents.getDocumentVersion(key, tex)
 end
 
 function bridge_documents.gitCommitId(key, tex)
-   docversion = documents.getDocumentVersion(key)
+   local docversion = documents.getDocumentVersion(key)
    if string.find(docversion, "-SNAPSHOT") then
       tex.sprint("\\\\\\textsmaller{[Commit~\\gitAbbrevHash{}~/~\\gitBranch{}]}")
    end

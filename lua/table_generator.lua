@@ -75,7 +75,7 @@ function tg.print_sfr_table_for_subsys(enfsup, sfrs)
    if #sfrs > 0 then
       local formatsfr = tg.itemformatters["sfrnoindex"]
       for _,v in pairs(sfrs) do
-	 row = {}
+	 local row = {}
 	 table.insert(row, formatsfr(v.sfr))
 	 table.insert(row, v.purpose and eoc)
 	 table.insert(row, v.purpose)

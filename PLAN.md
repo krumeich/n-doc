@@ -12,7 +12,7 @@
 
 - [x] **6. Module-private functions are inadvertently global** — helper functions in `db_core.lua`, `table_generator.lua`, `bridge_cc_core.lua` lack `local`. (`db_core.lua:16-69`, `table_generator.lua:163`, `bridge_cc_core.lua:213`)
 - [x] **7. Module tables themselves are global** — `common = {}`, `cc_core = {}`, `dbcore = {}`, `documents = {}`, `tg = {}`, all bridges. Only `tls.lua` correctly uses `local`. (all module files)
-- [ ] **8. Temp/loop variables leak into global scope** — `configfile`, `st`, `connections`, `tableentry`, `conntable`, `docversion`, `labels`, `row` all lack `local`. (various files)
+- [x] **8. Temp/loop variables leak into global scope** — `configfile`, `st`, `connections`, `tableentry`, `conntable`, `docversion`, `labels`, `row` all lack `local`. (various files)
 
 ## Phase 3 — Architecture / Design
 

@@ -16,7 +16,7 @@ function dbcore.init(db_path)
 end
 
 read_configs = function()
-   configfile = dbcore.dbpath .. "config"
+   local configfile = dbcore.dbpath .. "config"
    dbcore.configs = {}
    for i in io.lines(configfile) do
       table.insert(dbcore.configs, i)
@@ -41,11 +41,11 @@ end
 populate_tables = function(populate)
    local parser = require("ftcsv")
    for stmt, csv in populate() do
-      st = dbcore.db:prepare(stmt)
+      local st = dbcore.db:prepare(stmt)
       -- print ("Initialisiere Tabelle aus " .. csv)
       local parsedTable = parser.parse(dbcore.dbpath .. csv, ";")
       if texio then
-	 log_out = {}
+	 local log_out = {}
 	 table.insert(log_out, "\n(")
 	 table.insert(log_out, dbcore.dbpath)
 	 table.insert(log_out, csv)
