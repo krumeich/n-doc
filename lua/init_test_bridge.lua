@@ -13,4 +13,3 @@ end
 
 bridge_common = require "bridge_common"
 bridge_common.init("../common/test_db/")
-

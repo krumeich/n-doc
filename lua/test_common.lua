@@ -1,6 +1,6 @@
 #!/usr/bin/env texlua
 
-dofile("init_test_db.lua")
+dofile("init_test_bridge.lua")
 
 local common = require "common"
 
