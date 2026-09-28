@@ -217,44 +217,17 @@ function test_cc_core.test_getSfr2Sf()
    lu.assertEquals(cc_core.getSfr2Sf("fcs_ckm.1"), {"sf.cryptographicservices"})
 end
 
-function print_sfr_2_submod(sfr, relationtype)
-   print ("\n" .. relationtype .. " SFR auf Module abbilden: " .. sfr)
-   submods = t.generate_table_sfr_to_module(sfr, relationtype)
-   for _,v in ipairs(submods) do
-      print (v)
-   end
+function test_cc_core.test_getSfr2Obj()
+   lu.assertEquals(cc_core.getSfr2Obj("ftp_trp.1/admin"), {"o.admin", "o.tlscrypto"})
+   lu.assertEquals(cc_core.getSfr2Obj("nonexistent"), {})
 end
 
-function print_bundle_2_submod(bundle)
-   print ("\nBundle auf Module abbilden: " .. bundle)
-   submods = t.generate_table_bundle_to_module(bundle)
-   for _,v in ipairs(submods) do
-      print (v) --.subname .. "::" .. v.modname)
-   end
-end
-
-function print_submod_2_sfr(key, relationtype)
-   print ("\nModule auf SFR abbilden: " .. key)
-   sfrs = t.generate_table_module_to_sfr(key, relationtype)
-   print ("Anzahl: " .. #sfrs)
-   for _,v in ipairs(sfrs) do
-      print (v)
-   end
-   print()
-   g = require "cc_table_generator"
-   g.print_sfr_table_for_module(relationtype, sfrs)
-end
-
-function print_submod_2_bundle(key)
-   print ("\nModule auf Bundles abbilden: " .. key)
-   bundles = t.generate_table_module_to_bundle(key)
-   print ("Anzahl: " .. #bundles)
-   for _,v in ipairs(bundles) do
-      print (v)
-   end
-   print()
-   g = require "cc_table_generator"
-   g.print_bundle_table_for_module(bundles)
+function test_cc_core.test_generate_table_subsys_to_sfr()
+   local result = cc_core.generate_table_subsys_to_sfr("sub.tls", "enf")
+   lu.assertEquals(#result, 5)
+   lu.assertEquals(result[1].sfr, "fcs_ckm.2/tls")
+   local empty = cc_core.generate_table_subsys_to_sfr("sub.nonexistent", "enf")
+   lu.assertEquals(empty, {})
 end
 
 os.exit( lu.LuaUnit.run() )
