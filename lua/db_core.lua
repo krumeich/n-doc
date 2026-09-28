@@ -72,10 +72,10 @@ prepare_queries = function(queries)
 end
 
 singleresult = function(v, querykey)
-   local resultitem_name = dbcore.queries[querykey].resultitem;
+   local resultitem_name = dbcore.queries[querykey].resultitem
    local result = v[resultitem_name]
    return result
-end;
+end
 
 function dbcore.read_from_db(querykey, values)
    local result = {}

@@ -62,8 +62,8 @@ function cc_core.populate()
    return cmn.iterator(cc_core.populate_info, {"st", "csv"})
 end
 
-cc_core.verbatim_mapper = function (v) return v; end;
-cc_core.mod_mapper = function (v) return "mod." .. v.sub .. "." .. v.mod; end;
+cc_core.verbatim_mapper = function (v) return v end
+cc_core.mod_mapper = function (v) return "mod." .. v.sub .. "." .. v.mod end
 
 cc_core.querysets = {
     {name="spd", st=[[SELECT name FROM spd WHERE label=? COLLATE NOCASE]], resultitem = "name"},
