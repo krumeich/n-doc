@@ -25,7 +25,7 @@ read_configs = function()
 end
 
 populate_db = function()
-   for _,mod in pairs(dbcore.configs) do
+   for _,mod in ipairs(dbcore.configs) do
       local mod_config = require(mod)
       create_tables(mod_config.all_table_definitions)
       populate_tables(mod_config.populate)
@@ -53,7 +53,7 @@ populate_tables = function(populate)
             table.insert(log_out, ") ")
             texio.write("log", table.concat(log_out))
       end
-      for k,v in pairs(parsedTable) do
+      for k,v in ipairs(parsedTable) do
             st:bind_names(v)
             st:step()
             st:reset()

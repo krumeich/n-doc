@@ -5,7 +5,7 @@ function tls.init(basepath)
    local connections = {}
    local parser = require "ftcsv"
    local parsedTable = parser.parse(basepath .. "tls_definitions.csv", ";")
-   for k,v in pairs(parsedTable) do
+   for k,v in ipairs(parsedTable) do
       local tableentry = {key=v.key, logicalintf=v.logicalintf, role=v.role, peer=v.peer, protocol=v.protocol, port=v.port, idtoe=v.idtoe, idpeer=v.idpeer, authpeer=v.authpeer}
       tableentry.tdslink = v.submod == "NN" and "NN" or "\\tdslink[fq]{"  .. v.submod .. "}"
       tableentry.tds     = v.submod == "NN" and "NN" or "\\tds[fq]{"  .. v.submod .. "}"
@@ -23,7 +23,7 @@ function tls.printTlsConnectionTable(create_tdslinks)
    end
    return table.concat(result, "\n")
 end
-   
+
 
 function tls.getTlsConnectionTableRow(key, create_tdslinks)
    local tlsconn = tls.connections[key]
@@ -52,7 +52,7 @@ function tls.printTlsParametersForModule(key)
    table.insert(result, "  Identität des Peer  & " .. tlsconn.idpeer .. "\\\\")
    table.insert(result, "  Authentifizierung des Peer durch  & " .. tlsconn.authpeer .. "\\\\")
    return table.concat(result)
-end   
+end
 
 
 

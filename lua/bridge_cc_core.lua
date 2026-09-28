@@ -120,7 +120,7 @@ function bridge_cc_core.print_tsfi_to_sfr_table(key, relationtype, tex)
    local reltype = relationtype or ".*"
    local sfrs = cc_core.getTsfi2Sfr(key)
    local sfrlist = {}
-   for _,y in pairs(sfrs) do
+   for _,y in ipairs(sfrs) do
       if string.find(y.relationtype, reltype) then table.insert(sfrlist, y.label) end
    end
    local result = tg.print_item_list(sfrlist, "sfr")
@@ -186,7 +186,7 @@ end
 function bridge_cc_core.print_testcase_table(tex)
    local testcases = cc_core.getTestcases()
    local resulttable = {}
-   for _,testcase in pairs(testcases) do
+   for _,testcase in ipairs(testcases) do
       local tc = cc_core.getTestcase(testcase)
       local submod = cc_core.getTestcase2Module(testcase)
       local sfrs = cc_core.getTestcase2Sfr(testcase)
@@ -268,7 +268,7 @@ function bridge_cc_core.print_table_body(table_params, tex)
    for l in common.labels(table_params.label_row) do
       local data_row = init_data_row(table_params.label_header)
       local tupel = selector(l)
-      for _,val in pairs(tupel) do
+      for _,val in ipairs(tupel) do
             data_row[val]=[[\tcheck]]
       end
       local tablerow={}

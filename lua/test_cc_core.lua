@@ -237,7 +237,7 @@ function print_submod_2_sfr(key, relationtype)
    print ("\nModule auf SFR abbilden: " .. key)
    sfrs = t.generate_table_module_to_sfr(key, relationtype)
    print ("Anzahl: " .. #sfrs)
-   for _,v in pairs(sfrs) do
+   for _,v in ipairs(sfrs) do
       print (v)
    end
    print()
@@ -249,7 +249,7 @@ function print_submod_2_bundle(key)
    print ("\nModule auf Bundles abbilden: " .. key)
    bundles = t.generate_table_module_to_bundle(key)
    print ("Anzahl: " .. #bundles)
-   for _,v in pairs(bundles) do
+   for _,v in ipairs(bundles) do
       print (v)
    end
    print()
