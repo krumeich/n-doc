@@ -1,10 +1,27 @@
-bridge_cc_core={}
+local bridge_cc_core={}
 
-cc_core = require "cc_core"
-
-tablegen = require "table_generator"
+local cc_core = require "cc_core"
+local common = require "common"
+local tg = require "table_generator"
 
 local init_data_row, p
+
+local selectors = {
+   sfr2obj = cc_core.getSfr2Obj,
+   sfr2sf = cc_core.getSfr2Sf,
+   sfr2subjobj = cc_core.getSfr2Subjobj,
+   subjobj2sfr = cc_core.getSubjobj2Sfr,
+   spd2obj = cc_core.getSpd2Obj,
+}
+
+local function resolve_selector(selector)
+   if type(selector) == "string" then
+      local fn = selectors[selector]
+      if fn then return fn end
+      error("Unknown selector: " .. selector)
+   end
+   return selector
+end
 
 function bridge_cc_core.replacelabel(key, fullyq, tex)
    local fq = false
@@ -33,7 +50,7 @@ end
 function bridge_cc_core.print_module_to_sfr_table(key, relationtype, tex)
    local relationtype = relationtype or "enf"
    local sfrs = cc_core.generate_table_module_to_sfr(key, relationtype)
-   local result = tablegen.print_sfr_table_for_module(relationtype, sfrs)
+   local result = tg.print_sfr_table_for_module(relationtype, sfrs)
    tex.print(result)
 end
 
@@ -77,25 +94,25 @@ end
 function bridge_cc_core.print_subsys_to_sfr_table(key, relationtype, tex)
    local relationtype = relationtype or "enf"
    local sfrs = cc_core.generate_table_subsys_to_sfr(key, relationtype)
-   local result = tablegen.print_sfr_table_for_subsys(relationtype, sfrs)
+   local result = tg.print_sfr_table_for_subsys(relationtype, sfrs)
    tex.print(result)
 end
 
 function bridge_cc_core.print_module_to_bundle_table(key, tex)
    local bundles = cc_core.generate_table_module_to_bundle(key)
-   local result = tablegen.print_bundle_table_for_module(bundles)
+   local result = tg.print_bundle_table_for_module(bundles)
    tex.print(result)
 end
 
 function bridge_cc_core.print_sf_to_tsfi_table(key, tex)
    local tsfis = cc_core.getSf2Tsfi(key)
-   local result = tablegen.print_item_list(tsfis, "tsfilink")
+   local result = tg.print_item_list(tsfis, "tsfilink")
    tex.print(result)
 end
 
 function bridge_cc_core.print_tsfi_to_sf_table(key, tex)
    local sfs = cc_core.getTsfi2Sf(key)
-   local result = tablegen.print_item_list(sfs, "sflink")
+   local result = tg.print_item_list(sfs, "sflink")
    tex.print(result)
 end
 
@@ -106,7 +123,7 @@ function bridge_cc_core.print_tsfi_to_sfr_table(key, relationtype, tex)
    for _,y in pairs(sfrs) do
       if string.find(y.relationtype, reltype) then table.insert(sfrlist, y.label) end
    end
-   local result = tablegen.print_item_list(sfrlist, "sfr")
+   local result = tg.print_item_list(sfrlist, "sfr")
    tex.print(result)
 end
 
@@ -182,13 +199,13 @@ end
 
 function bridge_cc_core.print_testcase_to_tsfi_table(key, tex)
    local tsfis = cc_core.getTestcase2Tsfi(key)
-   local result = tablegen.print_item_list(tsfis, "tsfi")
+   local result = tg.print_item_list(tsfis, "tsfi")
    tex.sprint(result)
 end
 
 function bridge_cc_core.print_testcase_to_sfr_table(key, tex)
    local sfrs = cc_core.getTestcase2Sfr(key)
-   local result = tablegen.print_item_list(sfrs, "sfrnolink")
+   local result = tg.print_item_list(sfrs, "sfrnolink")
    tex.sprint(result)
 end
 
@@ -247,9 +264,10 @@ end
 
 function bridge_cc_core.print_table_body(table_params, tex)
    local resulttable = {}
+   local selector = resolve_selector(table_params.selector)
    for l in common.labels(table_params.label_row) do
       local data_row = init_data_row(table_params.label_header)
-      local tupel = table_params.selector(l)
+      local tupel = selector(l)
       for _,val in pairs(tupel) do
  	 data_row[val]=[[\tcheck]]
       end

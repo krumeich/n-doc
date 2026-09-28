@@ -1,4 +1,4 @@
-dbcore = {}
+local dbcore = {}
 
 dbcore.resultmappers={}
 dbcore.insert_statements={}

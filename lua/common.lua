@@ -1,4 +1,4 @@
-common = {}
+local common = {}
 
 function common.split(key, sep)
    local sep, fields = sep or ".", {}

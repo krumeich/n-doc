@@ -1,6 +1,6 @@
-bridge_common={}
+local bridge_common={}
 
-common = require "common"
+local common = require "common"
 
 function bridge_common.init(db_path)
    bridge_common.db_path = db_path

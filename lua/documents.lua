@@ -1,6 +1,6 @@
-documents = {}
+local documents = {}
 
-cmn = require "common"
+local cmn = require "common"
 
 documents.table_definitions = {
    [[CREATE TABLE releases ( `document` TEXT, `version` TEXT, `date` TEXT, `type` TEXT, PRIMARY KEY(`document`) )]],

@@ -1,4 +1,4 @@
-tg = {}
+local tg = {}
 
 local appendmodules, appendtsfi, appendsfr
 

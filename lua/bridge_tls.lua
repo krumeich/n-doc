@@ -1,6 +1,6 @@
-bridge_tls={}
+local bridge_tls={}
 
-tls=require("tls")
+local tls=require("tls")
 
 function bridge_tls.printTlsConnectionTable(tex)
    conntable = tls.printTlsConnectionTable()

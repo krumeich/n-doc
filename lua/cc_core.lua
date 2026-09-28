@@ -1,6 +1,6 @@
-cc_core = {}
+local cc_core = {}
 
-cmn = require "common"
+local cmn = require "common"
 
 cc_core.table_definitions = {
    [[CREATE TABLE subjobj ( `label` TEXT, `name` TEXT, `description` TEXT, PRIMARY KEY(`label`) )]],
@@ -348,13 +348,13 @@ function cc_core.getNumberOfTestcasesMainSfr(key)
 end
 
 function cc_core.getNumberOfTestcasesModule(key)
-   local _, sub, mod = common.split_at_dot(key)
+   local _, sub, mod = cmn.split_at_dot(key)
    local dbresult = cmn.get_relations_by_query_key("number_of_tests_for_module", {sub=sub, mod=mod})
    return cmn.check_for_errors(dbresult, "anzahl")
 end
 
 function cc_core.replacelabel(key, fq)
-   local typkey, subkey, modkey, intkey = common.split_at_dot(key)
+   local typkey, subkey, modkey, intkey = cmn.split_at_dot(key)
    local values = {subkey, modkey, intkey}
    local replacedlabel = {}
    local sub = subkey and cmn.get_relations_by_query_key("sub", values, cc_core.insert_error)[1]
@@ -392,7 +392,7 @@ end
 -- Ansonsten \nontsf
 --
 function cc_core.get_module_status(key)
-   local typkey, subkey, modkey = common.split_at_dot(key)
+   local typkey, subkey, modkey = cmn.split_at_dot(key)
    local dbresult = cmn.get_relations_by_query_key("module2sfr", {sub=subkey, mod=modkey, rel="enf"}, cc_core.mapper)
    if dbresult then
       return "\\enfc{}"
@@ -421,7 +421,7 @@ function cc_core.generate_table_module_to_sfr(key, relationtype, srckey)
     if srckey == "" then
         srckey = "%"
     end
-    local typkey, subkey, modkey = common.split_at_dot(key)
+    local typkey, subkey, modkey = cmn.split_at_dot(key)
     local query = "module2sfr"
     local dbresult = cmn.get_relations_by_query_key(query, {sub=subkey, mod=modkey, rel=relationtype, src=srckey})
     return cc_core.check_for_errors_in_lists(dbresult, key)
@@ -430,14 +430,14 @@ end
 function cc_core.generate_table_subsys_to_sfr(key, relationtype, srckey)
     local relationtype = relationtype or "enf"
     local srckey = srckey or "%"
-    local typkey, subkey = common.split_at_dot(key)
+    local typkey, subkey = cmn.split_at_dot(key)
     local query = "subsystem2sfr"
     local dbresult = cmn.get_relations_by_query_key(query, {sub=subkey, rel=relationtype, src=srckey})
     return cc_core.check_for_errors_in_lists(dbresult, key)
 end
 
 function cc_core.generate_table_module_to_bundle(key)
-    local typkey, subkey, modkey = common.split_at_dot(key)
+    local typkey, subkey, modkey = cmn.split_at_dot(key)
     local dbresult = cmn.get_relations_by_query_key("module2bundle", {sub=subkey, mod=modkey})
     return cc_core.check_for_errors_in_lists(dbresult, key)
 end

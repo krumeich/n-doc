@@ -1,6 +1,6 @@
-bridge_documents={}
+local bridge_documents={}
 
-documents = require "documents"
+local documents = require "documents"
 
 function bridge_documents.getDocumentVersion(key, tex)
    tex.sprint(documents.getDocumentVersion(key))
