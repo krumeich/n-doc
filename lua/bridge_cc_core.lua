@@ -48,7 +48,7 @@ function bridge_cc_core.get_module_status(key, tex)
 end
 
 function bridge_cc_core.print_module_to_sfr_table(key, relationtype, tex)
-   local relationtype = relationtype or "enf"
+   relationtype = relationtype or "enf"
    local sfrs = cc_core.generate_table_module_to_sfr(key, relationtype)
    local result = tg.print_sfr_table_for_module(relationtype, sfrs)
    tex.print(result)
@@ -92,7 +92,7 @@ function bridge_cc_core.print_sfr_for_tsfi_rows(tex)
 end
 
 function bridge_cc_core.print_subsys_to_sfr_table(key, relationtype, tex)
-   local relationtype = relationtype or "enf"
+   relationtype = relationtype or "enf"
    local sfrs = cc_core.generate_table_subsys_to_sfr(key, relationtype)
    local result = tg.print_sfr_table_for_subsys(relationtype, sfrs)
    tex.print(result)

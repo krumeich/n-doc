@@ -390,8 +390,8 @@ function cc_core.generate_table_sfr_to_module(sfr, relationtype)
 end
 
 function cc_core.generate_table_module_to_sfr(key, relationtype, srckey)
-    local relationtype = relationtype or "enf"
-    local srckey = srckey or "%"
+    relationtype = relationtype or "enf"
+    srckey = srckey or "%"
     if srckey == "" then
         srckey = "%"
     end
@@ -402,8 +402,8 @@ function cc_core.generate_table_module_to_sfr(key, relationtype, srckey)
 end
 
 function cc_core.generate_table_subsys_to_sfr(key, relationtype, srckey)
-    local relationtype = relationtype or "enf"
-    local srckey = srckey or "%"
+    relationtype = relationtype or "enf"
+    srckey = srckey or "%"
     local typkey, subkey = cmn.split_at_dot(key)
     local query = "subsystem2sfr"
     local dbresult = cmn.get_relations_by_query_key(query, {sub=subkey, rel=relationtype, src=srckey})
@@ -417,7 +417,7 @@ function cc_core.generate_table_module_to_bundle(key)
 end
 
 function cc_core.map_modules_to_sfr(sfr_label, relation)
-    local relation = relation or "enf"
+    relation = relation or "enf"
     local modules = cmn.get_relations_by_query_key("sfr2module", {sfr=sfr_label, rel=relation})
     local dbresult = {}
     for _,v in ipairs(modules) do
