@@ -1,5 +1,7 @@
 tg = {}
 
+local appendmodules, appendtsfi, appendsfr
+
 local relationtypes = {enf = "Enforcing", sup = "Supporting"}
 
 local eol = [[\\]]
@@ -160,7 +162,7 @@ function tg.generate_modules_for_sfr_row(sfr, enf_modules, sup_modules)
     return table.concat(result)
 end
 
-function appendmodules(modules, result)
+appendmodules = function(modules, result)
     if #modules > 0 then
         local formatmod = tg.itemformatters["module"]
         for i, module in pairs(modules) do
@@ -189,7 +191,7 @@ end
 
 local relationtypeformatters = {enf = [[\ndocenfabbrev]], sup = [[\ndocsupabbrev]]}
 
-function appendtsfi(tsfi, result)
+appendtsfi = function(tsfi, result)
     if #tsfi > 0 then
        local formattsfi = tg.itemformatters["tsfilink"]
         for i, ls in pairs(tsfi) do
@@ -221,7 +223,7 @@ function tg.generate_sfr_for_tsfi_row(tsfi, sfr)
     return table.concat(result)
 end
 
-function appendsfr(sfr, result)
+appendsfr = function(sfr, result)
     if #sfr > 0 then
         local formatsfr = tg.itemformatters["sfr"]
         for i, ls in pairs(sfr) do

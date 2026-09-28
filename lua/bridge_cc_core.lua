@@ -4,6 +4,8 @@ cc_core = require "cc_core"
 
 tablegen = require "table_generator"
 
+local init_data_row, p
+
 function bridge_cc_core.replacelabel(key, fullyq, tex)
    local fq = false
    if fullyq == "fq" then
@@ -210,7 +212,7 @@ function bridge_cc_core.print_module_to_num_testcase_table(tex)
    bridge_cc_core.print_category_to_num_testcase_table(tex, "modules", "modulestatus", cc_core.getNumberOfTestcasesModule, 3)
 end
 
-function init_data_row(label)
+init_data_row = function(label)
    local row = {}
    for l in common.labels(label) do
       row[l] = [[\tno]]
@@ -230,7 +232,7 @@ function bridge_cc_core.print_table_header(label, macro, tex)
    tex.sprint(table.concat(resulttable))
 end
 
-function p(label, r)
+p = function(label, r)
    local result = {}
    for l in common.labels(label) do
       table.insert(result, r[l])

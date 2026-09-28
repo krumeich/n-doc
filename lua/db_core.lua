@@ -4,6 +4,8 @@ dbcore.resultmappers={}
 dbcore.insert_statements={}
 dbcore.queries={}
 
+local read_configs, populate_db, create_tables, populate_tables, prepare_queries, singleresult
+
 function dbcore.init(db_path)
    dbcore.dbpath = db_path
    print("DB Path:", dbcore.dbpath)
@@ -13,7 +15,7 @@ function dbcore.init(db_path)
    populate_db()
 end
 
-function read_configs()
+read_configs = function()
    configfile = dbcore.dbpath .. "config"
    dbcore.configs = {}
    for i in io.lines(configfile) do
@@ -21,7 +23,7 @@ function read_configs()
    end
 end
 
-function populate_db()
+populate_db = function()
    for _,mod in pairs(dbcore.configs) do
       local mod_config = require(mod)
       create_tables(mod_config.all_table_definitions)
@@ -30,13 +32,13 @@ function populate_db()
    end
 end
 
-function create_tables(table_definitions)
+create_tables = function(table_definitions)
    for table_definition in table_definitions() do
       assert( dbcore.db:exec(table_definition))
    end
 end
 
-function populate_tables(populate)
+populate_tables = function(populate)
    local parser = require("ftcsv")
    for stmt, csv in populate() do
       st = dbcore.db:prepare(stmt)
@@ -58,7 +60,7 @@ function populate_tables(populate)
    end
 end
 
-function prepare_queries(queries)
+prepare_queries = function(queries)
    for querykey, st, resultitem, mapper in queries() do
       dbcore.queries[querykey] = {
 	 querystmt = assert(dbcore.db:prepare(st)),
@@ -75,7 +77,7 @@ function dbcore.insert_error(result)
   return result
 end
 
-function singleresult(v, querykey)
+singleresult = function(v, querykey)
    local resultitem_name = dbcore.queries[querykey].resultitem;
    local result = v[resultitem_name]
    return result
