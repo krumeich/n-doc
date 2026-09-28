@@ -20,7 +20,7 @@ function bridge_common.replaceUnderscore(key, tex)
    tex.sprint(result)
 end
 
-function bridge_common.remove_smart_hyphen(key)
+function bridge_common.remove_smart_hyphen(key, tex)
    local result = common.remove_smart_hyphen(key)
    tex.sprint(result)
 end
