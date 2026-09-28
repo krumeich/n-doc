@@ -49,4 +49,8 @@ function testcommon.test_generate_label_list_for_modules()
    "mod.vpn.core" })
 end
 
+function testcommon.test_undefined_error()
+   lu.assertEquals(common.undefined_error("some.key"), "\\textcolor{red}{some.key is undefined}")
+end
+
 os.exit( lu.LuaUnit.run() )

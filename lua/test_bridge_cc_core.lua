@@ -5,6 +5,7 @@ dofile("init_test_bridge.lua")
 testbridge = {}
 
 bridge_cc_core = require("bridge_cc_core")
+local common = require("common")
 
 function testbridge.test_replacelabel_subsystem()
    bridge_cc_core.replacelabel("sub.tls", "fq", tex.expected("TLS-Server"))
@@ -12,8 +13,8 @@ function testbridge.test_replacelabel_subsystem()
 end
 
 function testbridge.test_replacelabel_subsystem_failure()
-   bridge_cc_core.replacelabel("sub.xxx", "fq", tex.expected("\\textcolor{red}{sub.xxx is undefined}"))
-   bridge_cc_core.replacelabel("sub.xxx", "no", tex.expected("\\textcolor{red}{sub.xxx is undefined}"))
+   bridge_cc_core.replacelabel("sub.xxx", "fq", tex.expected(common.undefined_error("sub.xxx")))
+   bridge_cc_core.replacelabel("sub.xxx", "no", tex.expected(common.undefined_error("sub.xxx")))
 end
 
 function testbridge.test_replacelabel_module()
@@ -22,8 +23,8 @@ function testbridge.test_replacelabel_module()
 end
 
 function testbridge.test_replacelabel_module_failure()
-   bridge_cc_core.replacelabel("mod.tls.xxx", "fq", tex.expected("\\textcolor{red}{mod.tls.xxx is undefined}"))
-   bridge_cc_core.replacelabel("mod.tls.xxx", "no", tex.expected("\\textcolor{red}{mod.tls.xxx is undefined}"))
+   bridge_cc_core.replacelabel("mod.tls.xxx", "fq", tex.expected(common.undefined_error("mod.tls.xxx")))
+   bridge_cc_core.replacelabel("mod.tls.xxx", "no", tex.expected(common.undefined_error("mod.tls.xxx")))
 end
 
 function testbridge.test_replacelabel_interface()
@@ -32,8 +33,8 @@ function testbridge.test_replacelabel_interface()
 end
 
 function testbridge.test_replacelabel_interface_failure()
-   bridge_cc_core.replacelabel("int.tls.core.xxx", "fq", tex.expected("\\textcolor{red}{int.tls.core.xxx is undefined}"))
-   bridge_cc_core.replacelabel("int.tls.core.xxx", "no", tex.expected("\\textcolor{red}{int.tls.core.xxx is undefined}"))
+   bridge_cc_core.replacelabel("int.tls.core.xxx", "fq", tex.expected(common.undefined_error("int.tls.core.xxx")))
+   bridge_cc_core.replacelabel("int.tls.core.xxx", "no", tex.expected(common.undefined_error("int.tls.core.xxx")))
 end
 
 function testbridge.test_replacelabelplain_module()
@@ -42,8 +43,12 @@ function testbridge.test_replacelabelplain_module()
 end
 
 function testbridge.test_replacelabelplain_module_failure()
-   bridge_cc_core.replacelabelplain("mod.tls.xxx", "fq", tex.expected("\\textcolor{red}{mod.tls.xxx is undefined}"))
-   bridge_cc_core.replacelabelplain("mod.tls.xxx", "no", tex.expected("\\textcolor{red}{mod.tls.xxx is undefined}"))
+   bridge_cc_core.replacelabelplain("mod.tls.xxx", "fq", tex.expected(common.undefined_error("mod.tls.xxx")))
+   bridge_cc_core.replacelabelplain("mod.tls.xxx", "no", tex.expected(common.undefined_error("mod.tls.xxx")))
+end
+
+function testbridge.test_getSpd_undefined()
+   bridge_cc_core.getSpd("nonexistent", tex.expected(common.undefined_error("nonexistent")))
 end
 
 function testbridge.test_get_module_status()

@@ -70,22 +70,14 @@ prepare_queries = function(queries)
    end
 end
 
-function dbcore.insert_error(result)
-  if (#result == 0) then
-     table.insert(result, "__error__")
-  end
-  return result
-end
-
 singleresult = function(v, querykey)
    local resultitem_name = dbcore.queries[querykey].resultitem;
    local result = v[resultitem_name]
    return result
 end;
 
-function dbcore.read_from_db(querykey, values, error_mapper)
+function dbcore.read_from_db(querykey, values)
    local result = {}
-   local result_filter = error_mapper or dbcore.insert_error
    local mapper = dbcore.queries[querykey].mapper or singleresult
    local stmt = dbcore.queries[querykey].querystmt
    stmt:bind_names(values)
@@ -93,7 +85,7 @@ function dbcore.read_from_db(querykey, values, error_mapper)
       table.insert(result, mapper(row, querykey))
    end
    stmt:reset()
-   return result_filter(result)
+   return result
 end
 
 return dbcore

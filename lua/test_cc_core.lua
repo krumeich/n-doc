@@ -3,6 +3,7 @@
 dofile("init_test_db.lua")
 
 local cc_core = require "cc_core"
+local common = require "common"
 
 lu = require('luaunit')
 
@@ -140,15 +141,15 @@ function test_cc_core.test_get_testcases() lu.assertEquals(cc_core.getTestcases(
    "tls2", "tls3", "tls4", "tls5", "vpn1", "vpn2", "vpn3", "vpn4", "vpn5" }) end
 
 function test_cc_core.test_ate_number_of_testcases_to_tsfi()
-   lu.assertEquals(cc_core.getNumberOfTestcasesTsfi("ls.lan.httpmgmt"), "4")
+   lu.assertEquals(cc_core.getNumberOfTestcasesTsfi("ls.lan.httpmgmt"), 4)
 end
 
 function test_cc_core.test_ate_number_of_testcases_to_sfr()
-   lu.assertEquals(cc_core.getNumberOfTestcasesSfr("fpt_tdc.1/tls.zert"), "3")
+   lu.assertEquals(cc_core.getNumberOfTestcasesSfr("fpt_tdc.1/tls.zert"), 3)
 end
 
 function test_cc_core.test_ate_number_of_testcases_to_subsfr()
-   lu.assertEquals(cc_core.getNumberOfTestcasesSfr("fpt_tdc.1/tls.zert"), "3")
+   lu.assertEquals(cc_core.getNumberOfTestcasesSfr("fpt_tdc.1/tls.zert"), 3)
 end
 
 function test_cc_core.test_ate_number_of_testcases_to_main_sfr()
@@ -156,7 +157,7 @@ function test_cc_core.test_ate_number_of_testcases_to_main_sfr()
 end
 
 function test_cc_core.test_ate_number_of_testcases_to_module()
-   lu.assertEquals(cc_core.getNumberOfTestcasesModule("mod.cryptsystem.algorithms"), "3")
+   lu.assertEquals(cc_core.getNumberOfTestcasesModule("mod.cryptsystem.algorithms"), 3)
 end
 
 function test_cc_core.testreplacelabel()
@@ -166,8 +167,16 @@ function test_cc_core.testreplacelabel()
    lu.assertEquals(cc_core.replacelabel("sub.tls", true), [[TLS-Server]])
    lu.assertEquals(cc_core.replacelabel("mod.tls.core", true), "TLS-Server::\\-Core")
    lu.assertEquals(cc_core.replacelabel("int.tls.core.accept", true), "TLS-Server::\\-Core//\\-TLS-Connection-Accept")
-   lu.assertEquals(cc_core.replacelabel("sub.xxx", true),  "\\textcolor{red}{sub.xxx is undefined}")
-   lu.assertEquals(cc_core.replacelabel("mod.adminservice.xxx", true), "\\textcolor{red}{mod.adminservice.xxx is undefined}")
+   lu.assertEquals(cc_core.replacelabel("sub.xxx", true), common.undefined_error("sub.xxx"))
+   lu.assertEquals(cc_core.replacelabel("mod.adminservice.xxx", true), common.undefined_error("mod.adminservice.xxx"))
+end
+
+function test_cc_core.test_undefined_sfr()
+   lu.assertEquals(cc_core.getSfr("nonexistent"), common.undefined_error("nonexistent"))
+end
+
+function test_cc_core.test_undefined_objective()
+   lu.assertEquals(cc_core.getObjective("nonexistent"), common.undefined_error("nonexistent"))
 end
 
 function test_cc_core.test_module_to_sfr()
