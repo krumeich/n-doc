@@ -27,7 +27,7 @@
 - [x] **14. Trailing semicolons** — scattered in a few places, not idiomatic Lua. (`cc_core.lua:76`, `common.lua:33`)
 - [x] **15. Mixed tab/space indentation** — e.g. `db_core.lua:46` uses tabs while surrounding code uses spaces. (various files)
 - [x] **16. `pairs` on sequential arrays** — many places use `pairs()` where `ipairs()` is correct for ordered iteration. (`db_core.lua`, `table_generator.lua`, bridge files)
-- [ ] **17. Unused parameters** — `cc_core.getTestcases(srckey)`, `tls.printTlsConnectionTable(create_tdslinks)`, `tls.getTlsConnectionTableRow(key, create_tdslinks)`. (various files)
+- [x] **17. Unused parameters** — `cc_core.getTestcases(srckey)`, `tls.printTlsConnectionTable(create_tdslinks)`, `tls.getTlsConnectionTableRow(key, create_tdslinks)`. (various files)
 - [ ] **18. Parameter shadowing** — `local relationtype = relationtype or "enf"` shadows the parameter with a local of the same name. (`cc_core.lua:423,435,450`)
 - [ ] **19. `require` inside function body** — `table_generator.lua:50` does `require("cc_core")` at call-time, obscuring the dependency. (`lua/table_generator.lua:50`)
 - [ ] **20. Redundant table copy** — `cc_core.generate_table_sfr_to_module` copies a table element-by-element then returns it. Could return the original. (`lua/cc_core.lua:413-420`)

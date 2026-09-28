@@ -16,7 +16,7 @@ function tls.init(basepath)
    tls.initialized = true
 end
 
-function tls.printTlsConnectionTable(create_tdslinks)
+function tls.printTlsConnectionTable()
    local result = {}
    for tlsid in pairs(tls.connections) do
       table.insert(result, tls.getTlsConnectionTableRow(tlsid))
@@ -25,7 +25,7 @@ function tls.printTlsConnectionTable(create_tdslinks)
 end
 
 
-function tls.getTlsConnectionTableRow(key, create_tdslinks)
+function tls.getTlsConnectionTableRow(key)
    local tlsconn = tls.connections[key]
    local result = {}
    table.insert(result, tlsconn.logicalintf  .. "&")

@@ -302,7 +302,7 @@ function cc_core.getTestcase2Module(key)
    return cmn.get_relations_by_query_key("testcase2module", {testcase=key})
 end
 
-function cc_core.getTestcases(srckey)
+function cc_core.getTestcases()
    return cmn.generate_label_list("testcase")
 end
 

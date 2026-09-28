@@ -7,8 +7,8 @@ function bridge_tls.printTlsConnectionTable(tex)
    tex.sprint(conntable)
 end
 
-function bridge_tls.getTlsConnectionTableRow(key, document, tex)
-   local conntable = tls.getTlsConnectionTableRow(key, string.find(document, "advtds"))
+function bridge_tls.getTlsConnectionTableRow(key, _document, tex)
+   local conntable = tls.getTlsConnectionTableRow(key)
    tex.sprint(conntable)
 end
 
