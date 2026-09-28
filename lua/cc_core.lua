@@ -381,12 +381,7 @@ function cc_core.get_module_status(key)
 end
 
 function cc_core.generate_table_sfr_to_module(sfr, relationtype)
-    local submod = cmn.get_relations_by_query_key("sfr2module", { sfr=sfr, rel=relationtype })
-    local result = {}
-    for _,v in ipairs(submod) do
-        table.insert(result, v)
-    end
-   return result
+    return cmn.get_relations_by_query_key("sfr2module", { sfr=sfr, rel=relationtype })
 end
 
 function cc_core.generate_table_module_to_sfr(key, relationtype, srckey)
@@ -418,12 +413,7 @@ end
 
 function cc_core.map_modules_to_sfr(sfr_label, relation)
     relation = relation or "enf"
-    local modules = cmn.get_relations_by_query_key("sfr2module", {sfr=sfr_label, rel=relation})
-    local dbresult = {}
-    for _,v in ipairs(modules) do
-        table.insert(dbresult, v)
-    end
-    return dbresult
+    return cmn.get_relations_by_query_key("sfr2module", {sfr=sfr_label, rel=relation})
 end
 
 return cc_core
