@@ -225,10 +225,6 @@ function cc_core.getSfr2Obj(key)
    return cmn.get_relations_by_query_key("sfr2obj", {sfr=key}, function (e) return e end)
 end
 
-function cc_core.getSfr2Obj(key)
-   return cmn.get_relations_by_query_key("sfr2obj", {sfr=key}, function (e) return e end)
-end
-
 function cc_core.removeSfrSubComponent(key)
    local component = string.gsub(string.lower(key), "^([a-z]+_[a-z]+%.[0-9])%.[0-9]([/.]*)", "%1%2")
    return component

@@ -4,7 +4,7 @@
 
 - [x] **1. `tls.lazyinit()` guard is broken** — `tls.initialized` is checked but never set to `true`, so CSV is re-parsed on every call. (`lua/tls.lua:5`)
 - [x] **2. `bridge_common.remove_smart_hyphen` missing `tex` parameter** — function signature is `(key)` but calls `tex.sprint(result)`, relying on global `tex`. Inconsistent with all other bridge functions. (`lua/bridge_common.lua:23-26`)
-- [ ] **3. `cc_core.getSfr2Obj` defined twice** — identical copy-paste at lines 224-230. Second silently overwrites the first. (`lua/cc_core.lua:224-230`)
+- [x] **3. `cc_core.getSfr2Obj` defined twice** — identical copy-paste at lines 224-230. Second silently overwrites the first. (`lua/cc_core.lua:224-230`)
 - [ ] **4. Duplicate global `insert_error`** — defined as a global in both `db_core.lua:71` and `cc_core.lua:353`. Whichever loads last wins. (`lua/db_core.lua:71`, `lua/cc_core.lua:353`)
 - [ ] **5. Double DB initialization in test setup** — `init_test_db.lua` calls `bridge.init()` (which calls `db_core.init()`), then calls a standalone `init()` that does the same thing again. (`lua/init_test_db.lua`)
 
