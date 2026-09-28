@@ -6,18 +6,18 @@ local common = require "common"
 
 lu = require('luaunit')
 
-testcommon = {}
+test_common = {}
 
 -- Nur lokale Tests, verwenden keine Datenbank
-function testcommon.test_basis()
+function test_common.test_basis()
    lu.assertEquals(common.replaceUnderscore("FCS_COP.1/AK.Xml"), "FCS\\_COP.1/AK.Xml")
 end
 
-function testcommon.test_remove_smart_hyphen()
+function test_common.test_remove_smart_hyphen()
    lu.assertEquals(common.remove_smart_hyphen([[SF.Card\-Ter\-min\-al\-Mgmt]]), "SF.CardTerminalMgmt")
 end
 
-function testcommon.test_generate_label_list_for_tsfi()
+function test_common.test_generate_label_list_for_tsfi()
    local expected={
     "ls.lan",
     "ls.lan.ether",
@@ -40,7 +40,7 @@ function testcommon.test_generate_label_list_for_tsfi()
    lu.assertEquals(common.generate_label_list("tsfi", srckey), expected)
 end
 
-function testcommon.test_generate_label_list_for_modules()
+function test_common.test_generate_label_list_for_modules()
    lu.assertEquals(common.generate_label_list("modules", srckey), {
    "mod.adminsystem.mgmt", "mod.adminsystem.webserver",
    "mod.cryptsystem.algorithms", "mod.cryptsystem.keymgmt",
@@ -49,7 +49,7 @@ function testcommon.test_generate_label_list_for_modules()
    "mod.vpn.core" })
 end
 
-function testcommon.test_undefined_error()
+function test_common.test_undefined_error()
    lu.assertEquals(common.undefined_error("some.key"), "\\textcolor{red}{some.key is undefined}")
 end
 

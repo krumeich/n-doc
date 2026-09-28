@@ -33,4 +33,4 @@
 - [x] **20. Redundant table copy** — `cc_core.generate_table_sfr_to_module` copies a table element-by-element then returns it. Could return the original. (`lua/cc_core.lua:413-420`)
 - [x] **21. Dead code in tests** — loose debugging functions that are not actual tests. (`lua/test_cc_core.lua:211-249`)
 - [x] **22. Test init duplication** — `init_test_db.lua` and `init_test_bridge.lua` duplicate the `tex` mock setup. (`lua/init_test_db.lua`, `lua/init_test_bridge.lua`)
-- [ ] **23. Inconsistent test table naming** — `test_cc_core`, `testcommon`, `testtg`, `testbridge` — no uniform convention. (test files)
+- [x] **23. Inconsistent test table naming** — `test_cc_core`, `testcommon`, `testtg`, `testbridge` — no uniform convention. (test files)

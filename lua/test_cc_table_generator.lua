@@ -6,9 +6,9 @@ local tg = require "cc_table_generator"
 
 lu = require('luaunit')
 
-testtg = {}
+test_cc_table_generator = {}
 
-function testtg.testitemprinter()
+function test_cc_table_generator.testitemprinter()
    lu.assertEquals(tg.print_item_list({}, "tsfi"), [[\ndocnone]])
    lu.assertEquals(tg.print_item_list({}, "tsfi", {emptyitem="\\todo{Bewerten}"}), "\\todo{Bewerten}")
    lu.assertEquals(tg.print_item_list({"ls.vpnsis"}, "tsfi"), "\\tsfi{ls.vpnsis}")
@@ -20,7 +20,7 @@ bundles = { "de.ndesign.ab.cd", "de.ndesign.ef.gh", "de.ndesign.ij.kl" }
 bundletable = [[
 \begin{bundletable}Bundles\\\midrule\relax\bundle{de.ndesign.ab.cd}\\\bundle{de.ndesign.ef.gh}\\\bundle{de.ndesign.ij.kl}\\\end{bundletable}]]
 
-function testtg.testbundletable()
+function test_cc_table_generator.testbundletable()
    lu.assertEquals(tg.print_bundle_table_for_module(bundles), bundletable)
 end
 
@@ -35,7 +35,7 @@ sfrs = {"fmt_msa.3/nk.pf","fpt_stm.1/nk","fpt_tdc.1/nk.zert",
 sfrtable = [[
 \begin{enfsfrtable}Enforcing~SFR\\\midrule\relax\sfrlinknoindex{fmt_msa.3/nk.pf} & \sfrlinknoindex{fdp_uit.1/nk.update} & \sfrlinknoindex{fcs_ckm.4/ak}\\\sfrlinknoindex{fpt_stm.1/nk} & \sfrlinknoindex{fau_stg.1/ak} & \sfrlinknoindex{fcs_cop.1/ak.sigver.ssa}\\\sfrlinknoindex{fpt_tdc.1/nk.zert} & \sfrlinknoindex{fau_stg.4/ak} & \sfrlinknoindex{fcs_cop.1/ak.sigver.pss}\\\sfrlinknoindex{fdp_rip.1/nk} & \sfrlinknoindex{fcs_cop.1/storage.aes} & \sfrlinknoindex{fcs_cop.1/ak.sigver.ds2}\\\sfrlinknoindex{fpt_tst.1/nk} & \sfrlinknoindex{fcs_cop.1/sign} & \sfrlinknoindex{fcs_cop.1/ak.sigver.ecdsa}\\\sfrlinknoindex{fdp_acf.1/nk.update} & \sfrlinknoindex{fcs_cop.1/ak.sha}\\\sfrlinknoindex{fdp_itc.1/nk.update} & \sfrlinknoindex{fcs_ckm.1/ak.aes}\\\end{enfsfrtable}]]
 
-function testtg.testiterator_3()
+function test_cc_table_generator.testiterator_3()
    result = {}
    input = {1,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21}
    for col1, col2, col3 in tg.column_iterator_3(input) do
@@ -46,7 +46,7 @@ function testtg.testiterator_3()
    lu.assertEquals(result, {1,8,15,2,9,16,3,10,17,4,11,18,5,12,19,6,13,20,7,14,21})
 end
 
-function testtg.testiterator_4()
+function test_cc_table_generator.testiterator_4()
    result = {}
    input = {1,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24}
    for col1, col2, col3, col4 in tg.column_iterator_4(input) do
@@ -59,12 +59,12 @@ function testtg.testiterator_4()
 end
 
 
-function testtg.testsfrtable()
+function test_cc_table_generator.testsfrtable()
    result = tg.print_sfr_table_for_module("enf", sfrs)
    lu.assertEquals(result, sfrtable)
 end
 
-function testtg.test_modules_for_sfr_row()
+function test_cc_table_generator.test_modules_for_sfr_row()
     sfr = "fta_tab.1/jobnummer"
     sup_mods = {}
     enf_mods = {"mod.cardservice.core", "mod.cardservice.ctservice", "mod.signservice.core", "mod.signservice.jnrgen"}
@@ -75,7 +75,7 @@ function testtg.test_modules_for_sfr_row()
 end
 
 
-function testtg.test_modules_num_row_with_status()
+function test_cc_table_generator.test_modules_num_row_with_status()
    local formatter = tg.itemformatters["modulestatus"]
    local result = formatter("mod.tls.core")
    lu.assertEquals(result, [[\tdslink[fq]{mod.tls.core} & \enfc{}]])

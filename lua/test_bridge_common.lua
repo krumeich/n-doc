@@ -2,17 +2,17 @@
 
 dofile("init_test_bridge.lua")
 
-testbridge = {}
+test_bridge_common = {}
 
-function testbridge.test_replaceUnderscore()
+function test_bridge_common.test_replaceUnderscore()
    bridge_common.replaceUnderscore("tuc_kon_000", tex.expected("tuc\\_kon\\_000"))
 end
 
-function testbridge.test_remove_smart_hyphen()
+function test_bridge_common.test_remove_smart_hyphen()
    bridge_common.remove_smart_hyphen([[SF.Card\-Ter\-min\-al\-Mgmt]], tex.expected("SF.CardTerminalMgmt"))
 end
 
-function testbridge.test_iterator()
+function test_bridge_common.test_iterator()
    thelabels = {}
    for i in bridge_common.labels("tsfi") do
       table.insert(thelabels, i)

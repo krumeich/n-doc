@@ -2,19 +2,19 @@
 
 dofile("init_test_bridge.lua")
 
-testbridge = {}
+test_bridge_documents = {}
 
 bridge = require("bridge_documents")
 
-function testbridge.test_getDocumentVersion()
+function test_bridge_documents.test_getDocumentVersion()
    bridge.getDocumentVersion("adv_tds", tex.expected("1.0-SNAPSHOT"))
 end
 
-function testbridge.test_gitCommitId()
+function test_bridge_documents.test_gitCommitId()
    bridge.gitCommitId("adv_tds", tex.expected([[\\\textsmaller{[Commit~\gitAbbrevHash{}~/~\gitBranch{}]}]]))
 end
 
-function testbridge.test_getDocumentDate()
+function test_bridge_documents.test_getDocumentDate()
    bridge.getDocumentDate("adv_tds", tex.expected([[\today]]))
 end
 
