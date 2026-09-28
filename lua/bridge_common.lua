@@ -1,14 +1,14 @@
 local bridge_common={}
 
 local common = require "common"
+local dbcore = require "db_core"
 local tls = require "tls"
 
 function bridge_common.init(db_path)
    bridge_common.db_path = db_path
    print ("Luabridge", db_path)
-   if _G.db_core == nil then
-      _G.db_core = require "db_core"
-      _G.db_core.init(db_path)
+   if not dbcore.initialized then
+      dbcore.init(db_path)
    end
    tls.init(db_path .. "../")
 end

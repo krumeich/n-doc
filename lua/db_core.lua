@@ -13,6 +13,7 @@ function dbcore.init(db_path)
    dbcore.db = sqlite3.open_memory()
    read_configs()
    populate_db()
+   dbcore.initialized = true
 end
 
 read_configs = function()

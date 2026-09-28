@@ -19,7 +19,7 @@
 - [x] **9. Error handling via `"__error__"` magic string** — fragile sentinel value pattern across `db_core.lua`, `common.lua`, `cc_core.lua`. Idiomatic Lua uses `nil` + error message. (multiple files)
 - [x] **10. Boilerplate iterator pattern** — `all_table_definitions()`, `populate()`, `queries()` are copy-pasted with identical structure in `cc_core.lua` and `documents.lua`. (`cc_core.lua`, `documents.lua`)
 - [x] **11. `tls.lua` is an outlier** — parses its own CSV with a hardcoded relative path instead of integrating into the `db_core`/config framework. (`lua/tls.lua:7`)
-- [ ] **12. `_G.db_core` coupling** — `common.lua` accesses `_G.db_core` explicitly, a workaround for global-based module wiring. (`lua/common.lua:27,34`)
+- [x] **12. `_G.db_core` coupling** — `common.lua` accesses `_G.db_core` explicitly, a workaround for global-based module wiring. (`lua/common.lua:27,34`)
 
 ## Phase 4 — Style and Idiomacy
 

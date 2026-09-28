@@ -1,5 +1,7 @@
 local common = {}
 
+local dbcore = require "db_core"
+
 function common.split(key, sep)
    local sep, fields = sep or ".", {}
    local pattern = string.format("([^%s]+)", sep)
@@ -24,13 +26,13 @@ end
 
 function common.get_by_query_key(querykey, key)
    local theKey = string.lower(key)
-   local result = _G.db_core.read_from_db(querykey, {theKey})
+   local result = dbcore.read_from_db(querykey, {theKey})
    return common.check_for_errors(result, key)
 end
 
 function common.get_relations_by_query_key(querykey, keymap)
    local keys = keymap or {}
-   return _G.db_core.read_from_db(querykey, keys)
+   return dbcore.read_from_db(querykey, keys)
 end
 
 function common.undefined_error(key)
