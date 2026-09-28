@@ -76,6 +76,13 @@ end
 cc_core.verbatim_mapper = function (v) return v; end;
 cc_core.mod_mapper = function (v) return "mod." .. v.sub .. "." .. v.mod; end;
 
+function cc_core.insert_error(result)
+  if (#result == 0) then
+     table.insert(result, "__error__")
+  end
+  return result
+end
+
 cc_core.querysets = {
     {name="spd", st=[[SELECT name FROM spd WHERE label=? COLLATE NOCASE]], resultitem = "name"},
     {name="spd_all_labels", st=[[SELECT label FROM spd ORDER by PP_order]], resultitem = "label"},
@@ -346,20 +353,13 @@ function cc_core.getNumberOfTestcasesModule(key)
    return cmn.check_for_errors(dbresult, "anzahl")
 end
 
-function insert_error(result)
-  if (#result == 0) then
-     table.insert(result, "__error__")
-  end
-  return result
-end
-
 function cc_core.replacelabel(key, fq)
    local typkey, subkey, modkey, intkey = common.split_at_dot(key)
    local values = {subkey, modkey, intkey}
    local replacedlabel = {}
-   local sub = subkey and cmn.get_relations_by_query_key("sub", values, insert_error)[1]
-   local mod = modkey and cmn.get_relations_by_query_key("mod", values, insert_error)[1]
-   local int = intkey and cmn.get_relations_by_query_key("int", values, insert_error)[1]
+   local sub = subkey and cmn.get_relations_by_query_key("sub", values, cc_core.insert_error)[1]
+   local mod = modkey and cmn.get_relations_by_query_key("mod", values, cc_core.insert_error)[1]
+   local int = intkey and cmn.get_relations_by_query_key("int", values, cc_core.insert_error)[1]
    if fq then
       table.insert(replacedlabel, sub)
       table.insert(replacedlabel, mod and "::\\-")
