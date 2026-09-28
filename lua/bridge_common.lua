@@ -1,6 +1,7 @@
 local bridge_common={}
 
 local common = require "common"
+local tls = require "tls"
 
 function bridge_common.init(db_path)
    bridge_common.db_path = db_path
@@ -9,6 +10,7 @@ function bridge_common.init(db_path)
       _G.db_core = require "db_core"
       _G.db_core.init(db_path)
    end
+   tls.init(db_path .. "../")
 end
 
 function bridge_common.toLower(key, tex)
