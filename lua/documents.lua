@@ -7,12 +7,7 @@ documents.table_definitions = {
 }
 
 function documents.all_table_definitions()
-   local i = 0
-   local n = #documents.table_definitions
-   return function ()
-      i = i + 1
-      if i <= n then return documents.table_definitions[i] end
-   end
+   return cmn.iterator(documents.table_definitions)
 end
 
 documents.populate_info = {
@@ -20,12 +15,7 @@ documents.populate_info = {
 }
 
 function documents.populate()
-   local i = 0
-   local n = #documents.populate_info
-   return function ()
-      i = i + 1
-      if i <= n then return documents.populate_info[i].st, documents.populate_info[i].csv  end
-   end
+   return cmn.iterator(documents.populate_info, {"st", "csv"})
 end
 
 documents.querysets = {
@@ -35,12 +25,7 @@ documents.querysets = {
 }
 
 function documents.queries()
-   local i = 0
-   local n = #documents.querysets
-   return function ()
-      i = i + 1
-      if i <= n then return documents.querysets[i].name, documents.querysets[i].st, documents.querysets[i].resultitem, documents.querysets[i].mapper  end
-   end
+   return cmn.iterator(documents.querysets, {"name", "st", "resultitem", "mapper"})
 end
 
 function documents.getDocumentDate(key)

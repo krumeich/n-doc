@@ -28,14 +28,8 @@ cc_core.table_definitions = {
    [[CREATE TABLE testcase_tsfi ( `testcase` TEXT, `tsfi` TEXT, FOREIGN KEY(`tsfi`) REFERENCES `tsfi`(`label`), FOREIGN KEY(`testcase`) REFERENCES `testcases`(`label`))]]
 }
 
-
 function cc_core.all_table_definitions()
-   local i = 0
-   local n = #cc_core.table_definitions
-   return function ()
-      i = i + 1
-      if i <= n then return cc_core.table_definitions[i] end
-   end
+   return cmn.iterator(cc_core.table_definitions)
 end
 
 cc_core.populate_info = {
@@ -65,12 +59,7 @@ cc_core.populate_info = {
 }
 
 function cc_core.populate()
-   local i = 0
-   local n = #cc_core.populate_info
-   return function ()
-      i = i + 1
-      if i <= n then return cc_core.populate_info[i].st, cc_core.populate_info[i].csv  end
-   end
+   return cmn.iterator(cc_core.populate_info, {"st", "csv"})
 end
 
 cc_core.verbatim_mapper = function (v) return v; end;
@@ -201,12 +190,7 @@ select count(*) as anzahl from testcases join testcase_module on testcase_module
 }
 
 function cc_core.queries()
-   local i = 0
-   local n = #cc_core.querysets
-   return function ()
-      i = i + 1
-      if i <= n then return cc_core.querysets[i].name, cc_core.querysets[i].st, cc_core.querysets[i].resultitem, cc_core.querysets[i].mapper  end
-   end
+   return cmn.iterator(cc_core.querysets, {"name", "st", "resultitem", "mapper"})
 end
 
 function cc_core.getSfr(key)

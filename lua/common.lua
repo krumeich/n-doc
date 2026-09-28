@@ -68,4 +68,27 @@ function common.labels(labeltype)
    end
 end
 
+function common.iterator(data, fields)
+   local i = 0
+   local n = #data
+   if fields then
+      return function()
+         i = i + 1
+         if i <= n then
+            local entry = data[i]
+            local values = {}
+            for j, f in ipairs(fields) do
+               values[j] = entry[f]
+            end
+            return table.unpack(values, 1, #fields)
+         end
+      end
+   else
+      return function()
+         i = i + 1
+         if i <= n then return data[i] end
+      end
+   end
+end
+
 return common
