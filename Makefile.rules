@@ -13,5 +13,4 @@ wsdpdf:
 clean:
 	$(LATEXMK) $(CLEANFLAGS)
 	rm -rf _minted-* *.appnote
-	rm -rf $(TEXMFCACHEDIR)
 	../scripts/transform-wsd.sh clean $(CURDIR)
