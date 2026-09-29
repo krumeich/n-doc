@@ -1,11 +1,7 @@
+TEST_FILES := $(sort $(wildcard test_*.lua))
+
 .PHONY: tests
 
 tests:
-	texlua ./test_common.lua
-	texlua ./test_cc_core.lua
-	texlua ./test_documents.lua
-	texlua ./test_bridge_common.lua
-	texlua ./test_bridge_cc_core.lua
-	texlua ./test_bridge_documents.lua
-	texlua ./test_cc_table_generator.lua
+	@for t in $(TEST_FILES); do texlua ./$$t || exit 1; done
 
