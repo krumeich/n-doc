@@ -8,10 +8,10 @@ $(MASTER) : wsdpdf FORCE_MAKE
 	$(LATEXMK)
 
 wsdpdf:
-	../scripts/transform-wsd.sh pdf $(shell pwd)
+	../scripts/transform-wsd.sh pdf $(CURDIR)
 
 clean:
 	$(LATEXMK) $(CLEANFLAGS)
 	rm -rf _minted-* *.appnote
 	rm -rf $(TEXMFCACHEDIR)
-	../scripts/transform-wsd.sh clean $(shell pwd)
+	../scripts/transform-wsd.sh clean $(CURDIR)
