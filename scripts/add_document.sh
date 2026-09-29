@@ -17,11 +17,11 @@ fi
 the_doc=$1
 
 # copy the skeleton dir and rename the file.
-# Also insert the document name 
+# Also insert the document name
 cp -r scripts/_skeleton "$the_doc"
 pushd "$the_doc" >/dev/null
 mv skeleton.tex "${the_doc}.tex"
-sedi "s/skeleton/${the_doc}/g" .latexmkrc Makefile ${the_doc}.tex
+sedi "s/skeleton/${the_doc}/g" .latexmkrc ${the_doc}.tex
 popd >/dev/null
 
 # Add the document to the top level Makefile
