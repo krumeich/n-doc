@@ -1,2 +1,1 @@
-docker stop ndoc
-docker rm ndoc
+docker rm -f ndoc

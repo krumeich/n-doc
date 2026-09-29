@@ -4,7 +4,7 @@
 $ymlFile = Join-Path $PWD ".github\workflows\build_n-doc_template.yml"
 
 # Version aus yml-file
-# yml-file einlesen, pipen nach Select-String mit Pattern 'container: ndesign/n-doc:', 
+# yml-file einlesen, pipen nach Select-String mit Pattern 'container: ndesign/n-doc:',
 # den resultierenden Ausdruck als String handeln und hierauf Split-Operation mit Delimiter ':' aufrufen
 # ==> split liefert dann einen Vektor mit den einzelnen token
 $theversion = ((get-content $ymlFile | Select-String -CaseSensitive -Pattern 'container: ndesign/n-doc:') -split ':')[2]
@@ -13,8 +13,8 @@ $theversion = ((get-content $ymlFile | Select-String -CaseSensitive -Pattern 'co
 "ermittelte Version: <$theversion>"
 
 # Environment-var 'engine':
-# $Env:engine, falls NULL dann foo
-$opts = $engine ?? $theversion
+# $Env:engine, falls NULL dann $theversion
+$opts = $Env:engine ?? $theversion
 
 "verwendete engine: <$opts>"
 
