@@ -52,48 +52,26 @@
 % without numberings are created. Only use these macros. They take two mandatory
 % arguments: First the name of the label, second the name of the headline.
 
+%% Internal helper: \ndoc@make@hrefsectioning{sectioncmd} creates \hrefsectioncmd
+%% with star support. Not to be called by the user.
 \makeatletter
-\newcommand{\hrefchapter}{%
-  \@ifstar
-  {\hrefchapterStar}%
-  {\hrefchapterNoStar}}
-\newcommand{\hrefsection}{%
-  \@ifstar
-  {\hrefsectionStar}%
-  {\hrefsectionNoStar}}
-\newcommand{\hrefsubsection}{%
-  \@ifstar
-  {\hrefsubsectionStar}%
-  {\hrefsubsectionNoStar}}
-\newcommand{\hrefsubsubsection}{%
-  \@ifstar
-  {\hrefsubsubsectionStar}%
-  {\hrefsubsubsectionNoStar}}
-\newcommand{\hrefparagraph}{%
-  \@ifstar
-  {\hrefparagraphStar}%
-  {\hrefparagraphNoStar}}
-\newcommand{\hrefsubparagraph}{%
-  \@ifstar
-  {\hrefsubparagraphStar}%
-  {\hrefsubparagraphNoStar}}
+\newcommand{\ndoc@make@hrefsectioning}[1]{%
+  \expandafter\newcommand\csname href#1\endcsname{%
+    \@ifstar
+    {\csname ndoc@href@#1@star\endcsname}%
+    {\csname ndoc@href@#1@nostar\endcsname}}%
+  \expandafter\newcommand\csname ndoc@href@#1@nostar\endcsname[2]{%
+    \hypertarget{##1}{\csname #1\endcsname{##2}\label{##1}}}%
+  \expandafter\newcommand\csname ndoc@href@#1@star\endcsname[2]{%
+    \hypertarget{##1}{\csname #1\endcsname*{##2}\label{##1}}}%
+}
+\ndoc@make@hrefsectioning{chapter}
+\ndoc@make@hrefsectioning{section}
+\ndoc@make@hrefsectioning{subsection}
+\ndoc@make@hrefsectioning{subsubsection}
+\ndoc@make@hrefsectioning{paragraph}
+\ndoc@make@hrefsectioning{subparagraph}
 \makeatother
-
-
-%% Not to be called by the user, see section above
-\newcommand{\hrefchapterNoStar}[2]{\hypertarget{#1}{\chapter{#2}\label{#1}}}
-\newcommand{\hrefsectionNoStar}[2]{\hypertarget{#1}{\section{#2}\label{#1}}}
-\newcommand{\hrefsubsectionNoStar}[2]{\hypertarget{#1}{\subsection{#2}\label{#1}}}
-\newcommand{\hrefsubsubsectionNoStar}[2]{\hypertarget{#1}{\subsubsection{#2}\label{#1}}}
-\newcommand{\hrefparagraphNoStar}[2]{\hypertarget{#1}{\paragraph{#2}\label{#1}}}
-\newcommand{\hrefsubparagraphNoStar}[2]{\hypertarget{#1}{\subparagraph{#2}\label{#1}}}
-\newcommand{\hrefchapterStar}[2]{\hypertarget{#1}{\chapter*{#2}\label{#1}}}
-\newcommand{\hrefsectionStar}[2]{\hypertarget{#1}{\section*{#2}\label{#1}}}
-\newcommand{\hrefsubsectionStar}[2]{\hypertarget{#1}{\subsection*{#2}\label{#1}}}
-\newcommand{\hrefsubsubsectionStar}[2]{\hypertarget{#1}{\subsubsection*{#2}\label{#1}}}
-\newcommand{\hrefparagraphStar}[2]{\hypertarget{#1}{\paragraph*{#2}\label{#1}}}
-\newcommand{\hrefsubparagraphStar}[2]{\hypertarget{#1}{\subparagraph*{#2}\label{#1}}}
-%% Cleared. End of macros not to be called by the user
 
 
 
