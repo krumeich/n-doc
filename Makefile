@@ -47,12 +47,12 @@ GIT_HOOKS = $(addprefix $(GIT_HOOK_DIR), $(HOOKS))
 GIT_INFO = .git/gitHeadInfo.gin
 
 # Convenience goals to be called at the prompt
-.PHONY: st fsp tds agd clean all delivery subdirs db mwe cleanmwe wsdpdf hooks info $(MWE_DIRS) $(ALL_DIRS)
+.PHONY: alc arc ate st fsp tds ref clean all delivery subdirs db mwe cleanmwe wsdpdf hooks info $(MWE_DIRS) $(ALL_DIRS)
 
 # Make them all
 all: $(ALL_DIRS)
 
-#alc: $(ALC_DIR) # no need for this
+alc: $(ALC_DIR)
 
 arc: $(ARC_DIR)
 
@@ -77,7 +77,7 @@ delivery: $(DELIVERABLES)
 	cp $(DB_DIR)/$(DB_FILE) $(DELIVERY_DIR)
 	./scripts/renamereleases.sh $(DELIVERY_DIR)
 
-$(DELIVERABLES): $(ALL_DIRS) $(DB_DIR)
+$(DELIVERABLES): $(ALL_DIRS)
 
 $(ALL_DIRS): hooks
 	$(MAKE_CMD)
