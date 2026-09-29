@@ -1,4 +1,4 @@
-DB_FILE:=mauvecorp_vpn_client.db
+DB_FILE ?= mauvecorp_vpn_client.db
 CSV_FILES:= $(filter-out $(CONFIG_ITEMS_FILE), $(wildcard *.csv))
 
 .PHONY: all db

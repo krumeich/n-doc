@@ -12,7 +12,7 @@ ALC_DIR := alc
 REF_DIR := reflist
 ATE_DIR := ate_cov
 DB_DIR   := common/db
-DB_FILE  := mauvecorp_vpn_client.db
+export DB_FILE  := mauvecorp_vpn_client.db
 MWE_TDS_DIR  := mwe_tds
 MWE_FSP_DIR  := mwe_fsp
 MWE_ARC_DIR  := mwe_arc
@@ -86,7 +86,7 @@ $(MWE_DIRS):
 	./scripts/prepare_mwe.sh $@
 	$(MAKE_CMD)
 
-cleanmwe: 
+cleanmwe:
 	./scripts/cleanup.sh $(MWE_DIRS)
 
 hooks: $(GIT_HOOKS) $(GIT_INFO)
